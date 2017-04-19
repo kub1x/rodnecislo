@@ -28,6 +28,8 @@ A package for handling Czech Personal ID
 
 
 ## Features
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/kub1x/rodnecislo.svg)](https://greenkeeper.io/)
 // TODO
 
 ## Install
