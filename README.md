@@ -27,9 +27,6 @@ A package for handling Czech Personal ID
 </big></p>
 
 
-## Features
-// TODO
-
 ## Install
 
 ```sh
@@ -38,13 +35,30 @@ npm install rodnecislo
 
 ## Usage
 
-```sh
-// TODO
+```javascript
+import { rodnecislo } from 'rodnecislo';
+
+let rc = rodnecislo('110124/0415');
+
+rc.isMale();   // true
+rc.isFemale(); // false
+
+rc.year();     // 2011
+rc.month();    // 0 - just like with Date object
+rc.day();      // 24
+
+rc.birthDate() // Date 24-01-2011
+rc.birthDateAsString() // "24.01.2011" - the Czech format
+
+rc.isValid()   // true
+rc.isAdult()   // false - by default checks if current date is above 18 years old
+rc.isAdult(21) // false - for US
+
 ```
 
 ## Author
 
-Jakub kub1x Podlaha j.podlaha@gmail.com http://kub1x.org
+Jakub Podlaha j.podlaha@gmail.com
 
 ## License
 
@@ -59,8 +73,9 @@ Contributions are highly welcome! This repo is commitizen friendly — please re
 ## Dev notes
 
 Format specifications
-* https://cs.wikipedia.org/wiki/Rodn%C3%A9_%C4%8D%C3%ADslo
-* http://lorenc.info/3MA381/overeni-spravnosti-rodneho-cisla.htm
+ * https://sk.wikipedia.org/wiki/Rodn%C3%A9_%C4%8D%C3%ADslo
+ * https://cs.wikipedia.org/wiki/Rodn%C3%A9_%C4%8D%C3%ADslo
+ * http://lorenc.info/3MA381/overeni-spravnosti-rodneho-cisla.htm
 
 Generated using:
 https://github.com/d4rkr00t/generator-np
