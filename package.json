@@ -22,7 +22,7 @@
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
     "github-release": "conventional-github-releaser -p angular",
     "lint": "eslint src test",
-    "test": "ava --require babel-core/register",
+    "test": "ava",
     "validate": "npm run lint && npm test",
     "prepare": "npm run build && npm run validate && npm run check",
     "pp": "npm run prepare",
@@ -59,5 +59,14 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
+  },
+  "ava": {
+    "files": [
+      "test/*.js"
+    ],
+    "source": [
+      "src/**/*.js"
+    ],
+    "require": "babel-core/register"
   }
 }
