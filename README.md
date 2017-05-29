@@ -1,3 +1,5 @@
+<script src="https://raw.githubusercontent.com/kub1x/rodnecislo/master/src/lib/index.js"></script>
+
 <h1 align="center">rodnecislo</h1>
 
 <p align="center">
