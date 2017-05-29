@@ -1,4 +1,4 @@
-<big><h1 align="center">rodnecislo</h1></big>
+<h1 align="center">rodnecislo</h1>
 
 <p align="center">
   <a href="https://npmjs.org/package/rodnecislo">
@@ -20,17 +20,19 @@
   <a href="http://commitizen.github.io/cz-cli/">
     <img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt="Commitizen Friendly">
   </a>
+  <a href="https://greenkeeper.io/">
+    <img src="https://badges.greenkeeper.io/kub1x/rodnecislo.svg" alt="Greenkeeper badge">
+  </a>
+
 </p>
 
-<p align="center"><big>
-A package for handling Czech Personal ID
-</big></p>
+<p align="center">
+A package for handling Czech and Slovak Personal ID. This number is used in
+Czech and Slovak Republic as a primary unique person identifier by most, if not
+all, government institutions. It consists of two parts birth date with gender
+mark and a control birth number. 
+</p>
 
-
-## Features
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/kub1x/rodnecislo.svg)](https://greenkeeper.io/)
-// TODO
 
 ## Install
 
