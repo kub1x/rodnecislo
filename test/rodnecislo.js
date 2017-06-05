@@ -37,12 +37,23 @@ test('rodne cislo is invalid for invalid values', (t) => {
   t.false(rodnecislo('sadf').isValid());
   t.false(rodnecislo('123').isValid());
   t.false(rodnecislo('000000/0000').isValid());
+  t.false(rodnecislo('110124/0422').isValid()); // Invalid %11 condition
 });
 
 test('rodne cislo is valid for valid values', (t) => {
   t.true(rodnecislo('111111/111').isValid());
   t.true(rodnecislo('110124/041').isValid());
   t.true(rodnecislo('110124/0415').isValid());
+  t.true(rodnecislo('110124/0426').isValid());
+});
+
+test('rodne cislo determines years by PIN length', (t) => {
+  const YEAR_SHORT = 1911;
+  const YEAR_LONG = 2011;
+
+  t.is(rodnecislo('110124/041').year(), YEAR_SHORT);
+  t.is(rodnecislo('110124/0426').year(), YEAR_LONG);
+  t.is(rodnecislo('110124/0422').year(), YEAR_LONG); // even for invalid PINs
 });
 
 test('rodne cislo parses the birth date', (t) => {
