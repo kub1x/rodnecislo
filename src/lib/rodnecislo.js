@@ -63,7 +63,7 @@ const DEFAULT_ADULTHOOD = 18;
 export function RodneCislo(value) {
 
   // PIN parts
-  let _yy, _mm, _dd,
+  let _yy, _mm, _dd, _xxx,
   // Parsed birthdate
     _D, _M, _YYYY;
   // Gender
@@ -74,15 +74,15 @@ export function RodneCislo(value) {
   let _error = null;
 
   this.year = () => +_YYYY;
-  this.month = () => { return +_M; };
-  this.day = () => { return +_D; };
+  this.month = () => +_M;
+  this.day = () => +_D;
 
-  this.birthDate = () => { return new Date(_YYYY, _M, _D); };
-  this.birthDateAsString = () => { return `${_D}.${_M + MONTH_OFFSET}.${_YYYY}`; };
+  this.birthDate = () => new Date(_YYYY, _M, _D);
+  this.birthDateAsString = () => `${_D}.${_M + MONTH_OFFSET}.${_YYYY}`;
 
-  this.gender = () => { return _gender; };
-  this.isMale = () => { return _gender === GENDER.MALE; };
-  this.isFemale = () => { return _gender === GENDER.FEMALE; };
+  this.gender = () => _gender;
+  this.isMale = () => _gender === GENDER.MALE;
+  this.isFemale = () => _gender === GENDER.FEMALE;
 
   this.isValid = () => { return !_error; };
   this.error = () => { return _error; };
@@ -105,6 +105,9 @@ export function RodneCislo(value) {
 
     return (CD > _D) ? age : --age;
   };
+
+  this.toDIC = () => `CZ${_yy}${_mm}${_dd}${_xxx}`;
+
 
   /**
    * with OR without slash '/' between date part and distinction part
@@ -140,9 +143,10 @@ export function RodneCislo(value) {
 
     try {
       // Birth date parsed
-      _yy = +match[MATCH_YY];
-      _mm = +match[MATCH_MM];
-      _dd = +match[MATCH_DD];
+      _yy = match[MATCH_YY];
+      _mm = match[MATCH_MM];
+      _dd = match[MATCH_DD];
+      _xxx = match[MATCH_XX];
 
       if (_longFormat) {
         whole = `${match[MATCH_YY]}${match[MATCH_MM]}${match[MATCH_DD]}${match[MATCH_XX]}`;
@@ -181,14 +185,14 @@ export function RodneCislo(value) {
 
   function parseBirthDate() {
     // Year
-    _YYYY = _yy;
-    if (!_longFormat && _yy <= YEAR53) {
+    _YYYY = +_yy;
+    if (!_longFormat && _YYYY <= YEAR53) {
       // since ever - 31.12.1953
       _YYYY += CENT19;
-    } else if (_longFormat && _yy > YEAR53) {
+    } else if (_longFormat && _YYYY > YEAR53) {
       // 1.1.1954 - 31.12.1999
       _YYYY += CENT19;
-    } else if (_longFormat && _yy <= YEAR53) {
+    } else if (_longFormat && _YYYY <= YEAR53) {
       // 1.1.2000 - 31.12.2053
       _YYYY += CENT20;
     } else {
@@ -199,23 +203,24 @@ export function RodneCislo(value) {
     }
 
     // Month and Gender
-    if (_mm > WOMAN_MM_ADDITION) {
+    _M = +_mm;
+    if (_M > WOMAN_MM_ADDITION) {
       _gender = GENDER.FEMALE;
-      _mm -= WOMAN_MM_ADDITION;
+      _M -= WOMAN_MM_ADDITION;
     }
 
-    if (_mm > EXTRA_MM_ADDITION) {
-      _mm %= EXTRA_MM_ADDITION;
+    if (_M > EXTRA_MM_ADDITION) {
+      _M %= EXTRA_MM_ADDITION;
     }
 
-    if (_mm < MONTH_MIN || _mm > MONTH_MAX) {
+    if (_M < MONTH_MIN || _M > MONTH_MAX) {
       _error = 'Invalid month';
       return false;
     }
 
     // Ok
-    _M = _mm - MONTH_OFFSET;
-    _D = _dd;
+    _M -= MONTH_OFFSET;
+    _D = +_dd;
 
     // Final birthdate validation
     // try {

@@ -30,7 +30,10 @@ test('constructor returns RodneCislo', (t) => {
 
 test('rodne cislo is invalid for invalid values', (t) => {
   t.false(rodnecislo().isValid());
+  t.false(rodnecislo({}).isValid());
+  t.false(rodnecislo([]).isValid());
   t.false(rodnecislo('').isValid());
+  t.false(rodnecislo('/').isValid());
   t.false(rodnecislo('sadf').isValid());
   t.false(rodnecislo('123').isValid());
   t.false(rodnecislo('000000/0000').isValid());
@@ -78,7 +81,7 @@ test('rodne cislo returns age', (t) => {
   t.is(rodnecislo('990201/1119').age(), Y17);
 });
 
-test.skip('rodne cislo generates DIC', (t) => {
+test('rodne cislo generates DIC', (t) => {
   t.is(rodnecislo('990130/1113').toDIC(), 'CZ9901301113');
   t.is(rodnecislo('990131/1112').toDIC(), 'CZ9901311112');
   t.is(rodnecislo('990201/1119').toDIC(), 'CZ9902011119');
