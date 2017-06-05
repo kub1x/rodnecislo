@@ -180,8 +180,13 @@ export function RodneCislo(value) {
   const WOMAN_MM_ADDITION = 50;
   const EXTRA_MM_ADDITION = 20;
 
-  const MONTH_MIN = 1;
-  const MONTH_MAX = 12;
+  function isDateValid(y, m, d) {
+    const date = new Date(y, m, d);
+    const convertedDate = `${date.getFullYear()}${date.getMonth()}${date.getDate()}`;
+    const givenDate = `${y}${m}${d}`;
+
+    return (givenDate === convertedDate);
+  }
 
   function parseBirthDate() {
     // Year
@@ -204,31 +209,25 @@ export function RodneCislo(value) {
 
     // Month and Gender
     _M = +_mm;
+
+    // Women have month + 50
     if (_M > WOMAN_MM_ADDITION) {
       _gender = GENDER.FEMALE;
-      _M -= WOMAN_MM_ADDITION;
+      _M %= WOMAN_MM_ADDITION;
     }
 
-    if (_M > EXTRA_MM_ADDITION) {
-      _M %= EXTRA_MM_ADDITION;
-    }
-
-    if (_M < MONTH_MIN || _M > MONTH_MAX) {
-      _error = 'Invalid month';
-      return false;
-    }
+    // Sometimes men/women get extra month + 20
+    _M %= EXTRA_MM_ADDITION;
 
     // Ok
     _M -= MONTH_OFFSET;
     _D = +_dd;
 
     // Final birthdate validation
-    // try {
-    //   new Date(_YYYY, _M, _D);
-    // } catch (e) {
-    //   _error = 'Invalid birth date';
-    //   return false;
-    // }
+    if (!isDateValid(_YYYY, _M, _D)) {
+      _error = 'Invalid birth date';
+      return false;
+    }
 
     return true;
   }
