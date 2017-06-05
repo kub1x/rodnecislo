@@ -7,7 +7,11 @@
     "lib/"
   ],
   "keywords": [
-    "personal","ID","Czech","node","module"
+    "personal",
+    "ID",
+    "Czech",
+    "node",
+    "module"
   ],
   "license": "MIT",
   "repository": {
