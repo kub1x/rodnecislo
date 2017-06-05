@@ -146,13 +146,12 @@ export function RodneCislo(value) {
   const MONTH_MIN = 1;
   const MONTH_MAX = 12;
 
-  function parse(inputText) {
-
+  function parseRawInput(inputText) {
     const match = RODNECISLO_RE.exec(inputText);
 
     if (!match) {
       _error = 'Didn\'t match RegEx';
-      return;
+      return false;
     }
 
     _longFormat = match[MATCH_XX].length === LONG_XX_LENGTH;
@@ -174,9 +173,9 @@ export function RodneCislo(value) {
 
     } catch (e) {
       _error = 'Failed to parse input string';
+      return false;
     }
 
-    // Modulo condition
     if (_longFormat) {
       if (whole % MODULO === MODULO_RESULT) {
         // good old classic
@@ -184,9 +183,13 @@ export function RodneCislo(value) {
         // the rare 1000 cases
       } else {
         _error = 'Failed the modulo condition';
+        return false;
       }
     }
+    return true;
+  }
 
+  function parseBirthDate() {
     // Year
     _YYYY = _yy;
     if (!_longFormat && _yy <= YEAR53) {
@@ -229,7 +232,11 @@ export function RodneCislo(value) {
     //   _error = 'Invalid birth date';
     // }
 
-  } // .parse();
+  }
+
+  function parse(inputText) {
+    return parseRawInput(inputText) && parseBirthDate();
+  }
 
   parse(value);
 
