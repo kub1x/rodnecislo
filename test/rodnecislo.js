@@ -1,7 +1,25 @@
+import sinon from 'sinon';
 import test from 'ava';
 import 'babel-core/register';
 
 import { rodnecislo, RodneCislo } from '../src/lib/';
+
+// Mock new Date()
+
+const NOW_SEC = 1485865800000; // 31.1.2017 13:30
+let sandbox, clock;
+
+test.before(() => {
+  sandbox = sinon.sandbox.create();
+  clock = sinon.useFakeTimers(NOW_SEC);
+});
+
+test.after(() => {
+  sandbox.restore();
+  clock.restore();
+});
+
+// Tests
 
 test('constructor returns RodneCislo', (t) => {
   const v = rodnecislo();
