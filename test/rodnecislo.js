@@ -37,6 +37,7 @@ test('rodne cislo is invalid for invalid values', (t) => {
 });
 
 test('rodne cislo is valid for valid values', (t) => {
+  t.true(rodnecislo('111111/111').isValid());
   t.true(rodnecislo('110124/041').isValid());
   t.true(rodnecislo('110124/0415').isValid());
 });
@@ -56,7 +57,29 @@ test('rodne cislo parses the birth date', (t) => {
   t.is(rodnecislo(PIN).birthDateAsString(), BIRTH_DATE);
 });
 
-test('rodne cislo finds out who is adult', (t) => {
-  t.true(rodnecislo('770124/0415').isAdult());
-  t.false(rodnecislo('110124/0415').isAdult());
+test('rodne cislo finds out who is adult (over 18)', (t) => {
+  t.true(rodnecislo('990130/1113').isAdult());
+  t.false(rodnecislo('990131/1112').isAdult());
+  t.false(rodnecislo('990201/1119').isAdult());
+
+  const US_ADULTHOOD_AGE = 21;
+
+  t.true(rodnecislo('960130/1413').isAdult(US_ADULTHOOD_AGE));
+  t.false(rodnecislo('960131/1412').isAdult(US_ADULTHOOD_AGE));
+  t.false(rodnecislo('960201/1419').isAdult(US_ADULTHOOD_AGE));
+});
+
+test('rodne cislo returns age', (t) => {
+  const Y17 = 17;
+  const Y18 = 18;
+
+  t.is(rodnecislo('990130/1113').age(), Y18);
+  t.is(rodnecislo('990131/1112').age(), Y17);
+  t.is(rodnecislo('990201/1119').age(), Y17);
+});
+
+test.skip('rodne cislo generates DIC', (t) => {
+  t.is(rodnecislo('990130/1113').toDIC(), 'CZ9901301113');
+  t.is(rodnecislo('990131/1112').toDIC(), 'CZ9901311112');
+  t.is(rodnecislo('990201/1119').toDIC(), 'CZ9902011119');
 });

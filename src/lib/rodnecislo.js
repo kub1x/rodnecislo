@@ -73,7 +73,7 @@ export function RodneCislo(value) {
   // Validation
   let _error = null;
 
-  this.year = () => { return +_YYYY; };
+  this.year = () => +_YYYY;
   this.month = () => { return +_M; };
   this.day = () => { return +_D; };
 
@@ -87,33 +87,23 @@ export function RodneCislo(value) {
   this.isValid = () => { return !_error; };
   this.error = () => { return _error; };
 
-  this.isAdult = (adulthood = DEFAULT_ADULTHOOD) => {
+  this.isAdult = (adulthood = DEFAULT_ADULTHOOD) => this.age() >= adulthood;
 
+  this.age = () => {
     // Current date parsed (ignoring +1 timezone)
     const now = new Date();
     const CYYYY = now.getFullYear();
     const CM = now.getMonth();
     const CD = now.getDate();
 
-    // Yes.. we colud do some hacky one liner, but
-    // this just feels less hackturbating.
+    let age = CYYYY - _YYYY;
 
-    if (CYYYY - _YYYY < +adulthood) { return false; }
-    if (CYYYY - _YYYY > +adulthood) { return true; }
+    if (CM > _M) { return age; }
+    if (CM < _M) { return --age; }
 
-    // We're on the year of the adulthood bday.
+    // We're on the MONTH of the bday.
 
-    if (CM < _M) { return false; }
-    if (CM > _M) { return true; }
-
-    // We're on the MONTH of the adulthood bday.
-
-    if (CD < _D) { return false; }
-    if (CD > _D) { return true; }
-
-    // HAPPY BIRTHDAY!!! And also wait for tomorrow shall we..?
-    return false;
-
+    return (CD > _D) ? age : --age;
   };
 
   /**
@@ -135,16 +125,6 @@ export function RodneCislo(value) {
   const MODULO_RESULT = 0;
   const MODULO_EXCEPTION_VALUE = 10;
   const MODULO_EXCEPTION_CHECK = 0;
-
-  const YEAR53 = 53;
-  const CENT19 = 1900;
-  const CENT20 = 2000;
-
-  const WOMAN_MM_ADDITION = 50;
-  const EXTRA_MM_ADDITION = 20;
-
-  const MONTH_MIN = 1;
-  const MONTH_MAX = 12;
 
   function parseRawInput(inputText) {
     const match = RODNECISLO_RE.exec(inputText);
@@ -189,6 +169,16 @@ export function RodneCislo(value) {
     return true;
   }
 
+  const YEAR53 = 53;
+  const CENT19 = 1900;
+  const CENT20 = 2000;
+
+  const WOMAN_MM_ADDITION = 50;
+  const EXTRA_MM_ADDITION = 20;
+
+  const MONTH_MIN = 1;
+  const MONTH_MAX = 12;
+
   function parseBirthDate() {
     // Year
     _YYYY = _yy;
@@ -205,6 +195,7 @@ export function RodneCislo(value) {
       // NOTE This never happends as it would be the same as for 1954-2000
       // 1.1.2054 - until ever
       _error = 'We didn\'t think about this yet...';
+      return false;
     }
 
     // Month and Gender
@@ -219,6 +210,7 @@ export function RodneCislo(value) {
 
     if (_mm < MONTH_MIN || _mm > MONTH_MAX) {
       _error = 'Invalid month';
+      return false;
     }
 
     // Ok
@@ -230,15 +222,14 @@ export function RodneCislo(value) {
     //   new Date(_YYYY, _M, _D);
     // } catch (e) {
     //   _error = 'Invalid birth date';
+    //   return false;
     // }
 
+    return true;
   }
 
-  function parse(inputText) {
-    return parseRawInput(inputText) && parseBirthDate();
-  }
-
-  parse(value);
+  parseRawInput(value);
+  parseBirthDate();
 
   return this;
 
