@@ -26,10 +26,11 @@
 </p>
 
 <p align="center">
-A package for handling Czech and Slovak Personal ID Number (PIN). This number is used in
-Czech and Slovak Republic as a primary unique person identifier by most, if not all, 
-government institutions. It consists of two parts birth date with gender mark and a 
-control number. It is commonly known as "rodné číslo" hence the library name. 
+A npm package for validating and deriving information from [Czech and Slovak National Identification Number](https://en.wikipedia.org/wiki/National_identification_number#Czech_Republic_and_Slovakia). 
+This number is used in Czech and Slovak Republic as the primary unique identifier for every person 
+by most, if not all, government institutions, banks, etc. It consists of two parts: *birth date* 
+(with *gender mark*) and *serial number* with *check digit*. It is commonly known as *Birth Number* 
+or *rodné číslo* in both Czech and Slovak hence the library name. 
 </p>
 
 
@@ -70,12 +71,14 @@ rc.toDIC()     // "CZ1112133121" - Czech Tax Identification Number (DIč)
 
 ### Sources
 Specification comes mainly from following links: 
- * https://sk.wikipedia.org/wiki/Rodn%C3%A9_%C4%8D%C3%ADslo
- * https://cs.wikipedia.org/wiki/Rodn%C3%A9_%C4%8D%C3%ADslo
- * http://lorenc.info/3MA381/overeni-spravnosti-rodneho-cisla.htm
+ * [Rodné číslo - sk wiki](https://sk.wikipedia.org/wiki/Rodn%C3%A9_%C4%8D%C3%ADslo)
+ * [Rodné číslo - cz wiki](https://cs.wikipedia.org/wiki/Rodn%C3%A9_%C4%8D%C3%ADslo)
+ * [National identification number - Czech and Slovak birth number - en wiki](https://en.wikipedia.org/wiki/National_identification_number#Czech_Republic_and_Slovakia)
+ * [Educational web of Miroslav Lorenc](http://lorenc.info/3MA381/overeni-spravnosti-rodneho-cisla.htm)
+ * [Czech Civil Code](http://obcanskyzakonik.justice.cz/images/pdf/NOZ_interaktiv.pdf)
 
 ### RegExp
-RegExp for rodné číslo (Personal Identification Number). With/without slash.
+RegExp for *rodné číslo*. With/without slash.
 
 ```
   |   1   |      2a      |       2b      |       2c      |       2d       |             3          |4 |    5   |
@@ -85,52 +88,72 @@ RegExp for rodné číslo (Personal Identification Number). With/without slash.
 Explanation: 
 * 1 - 00-99 birth year
 * 2 birth month
-  * a - 01-12 man
-  * b - 21-32 man\*
-  * c - 51-62 woman
-  * d - 71-82 woman\*
+  - a - 01-12 for men
+  - b - 21-32 for men\*
+  - c - 51-62 for women
+  - d - 71-82 for women\*
 * 3 - 01-31 birth day
 * 4 - slash
-* 5 - 000-9999 birth number and control number
+* 5 - 000-9999 serial and check digit
 
- > * Since 2004 (law nr. 53/2004) it is possible to add extra 20 to the month number in case the number 
- > of newborns exceeds all the possible combinations of birth date/birth number divisible by 11. 
+> \* Since 2004 (law nr. 53/2004) it is possible to add extra 20 to the month number in case the number 
+> of newborns exceeds all the possible combinations of birth date/birth number divisible by 11. 
 
 ### Historical evolution
 
 * Before 1953
-  - PIN has format `"yymmdd/xxx"`
+  - People in Czechoslovakia have *Personal ID Card Number* or 
+    *Work ID Card Number*. It isn't called *birth number*/*rodne cislo* yet. 
+  - It has format `yymmdd/sss`
   - Women have `mm+50`
-  - xxx is birth number on the date
-  - eg: "516231/016" is woman, born on 31 Dec 1951 as a 16th baby *(not sure if the check numbers are separate for men/women)*
+  - `sss` is *serial number* for people born on the same day
+  - Eg: `516231/016` is *birth number* of a woman, born on 31 Dec 1951
 * After 1953
-  - PIN has format `"yymmdd/xxxc"`
-  - Women have `mm+50`
+  - *Birth number* is official now
+  - It has format: `yymmdd/sssc`
+  - Women have: `mm+50`
   - Whole PIN must be divisible by 11 OR
-  - if `(+"yymmddxxx" % 11 === 10 && "c" === "0")` then the PIN is valid
+  - If `(yymmddsss % 11 == 10 && c == 0)` then the *birth number* is valid
 * After 1985
-  - the `(+"yymmddxxx" % 11 === 10 && "c" === "0")` exception was removed. every new PIN must be divisible by 11. 
-* 1993 Czechoslovakia split into Czech Republic and Slovak Republic, the legislation might vary from this point on. 
+  - The `(yymmddsss % 11 == 10 && c == 0)` exception was removed
+  - ... every new *birth number* must be divisible by 11 as a whole from now on
+* In 1993 [Czechoslovakia split into Czech Republic and Slovak Republic](https://en.wikipedia.org/wiki/Dissolution_of_Czechoslovakia)
+  - the legislation might differ from this point on
 * After 2004
   - Men can also have `mm+20`
   - Women can also have `mm+70`
 
 So to flatten the knowledge: 
-* short/long PIN
-  - short format  =>  before 1953
-  - long format and yy < 53  =>  yyyy = 20yy
-  - who knows what comes after 2053...
-* month/gender
-  - month is 51-62 or 71-82 - it is a woman subtract 50 and 20
-  - month is 01-12 or 21-32 - it is a man subtract 20
-* modulo condition
-  - short PIN - no modulo condition
-  - whole PIN divisible by 11 - valid PIN
-  - whole PIN without last digit modulo 11 equals 10 AND last digit is 0 or "zero" AND year is 54-85 - valid PIN
+* Short/long version
+  - Short version was used before 1953
+  - Long version AND `yy >= 54` THEN `yyyy = 19yy`
+  - Long version AND `yy < 53` THEN `yyyy = 20yy`
+  - Who knows what comes in 2053...
+* Month/Gender
+  - Month is `51-62` OR `71-82` - it is a woman subtract `50` and `20`
+  - Month is `01-12` OR `21-32` - it is a man subtract `20`
+* Modulo condition
+  - Short *birth number* - no modulo condition
+  - Whole *birth number* is divisible by 11 - valid *birth number*
+  - Whole *birth number* without *check digit* modulo `11` equals `10` AND *check digit* is `0` AND year is `54-85` - valid *birth number*
   
 ### Age and Adultood
 I'm currently veryfying with legal offices, whether a person is adult from the midnight of his/her birthday or the day after. 
 
+### VAT Identification Number
+In Czech the personal [VAT Identification Number](https://en.wikipedia.org/wiki/VAT_identification_number#European_Union_VAT_identification_numbers) is derived from *Birth Number* by adding `CZ` prefix and ommitting the slash. It is called [Daňové identifikační číslo (DIČ)](https://cs.wikipedia.org/wiki/Da%C5%88ov%C3%A9_identifika%C4%8Dn%C3%AD_%C4%8D%C3%ADslo) hence the `.toDIC()` method. 
+
+## TODOs
+
+### Knowledge
+ * What is the age of a person on his/her birth day? 
+ * What happens to *birth number* in 2053?
+ * How many colisions in *birth number* are there?
+ 
+### Programming
+ * Make it definitelytyped.org
+ * Add optional support for momentjs.com
+ * Build into jQuery plugin
 
 ## Author
 
@@ -142,7 +165,7 @@ Jakub Podlaha j.podlaha@gmail.com
 
 ## Contributing
 
-Contributions are highly welcome! This repo is commitizen friendly — please read about it [here](http://commitizen.github.io/cz-cli/).
+Contributions are highly welcome! Really! This repo is *trying to be ;-)* commitizen friendly — please read about it [here](http://commitizen.github.io/cz-cli/).
 
 ----
 
