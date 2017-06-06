@@ -25,14 +25,11 @@
   
 </p>
 
-<p align="center">
 A npm package for validating and deriving information from [Czech and Slovak National Identification Number](https://en.wikipedia.org/wiki/National_identification_number#Czech_Republic_and_Slovakia). 
 This number is used in Czech and Slovak Republic as the primary unique identifier for every person 
 by most, if not all, government institutions, banks, etc. It consists of two parts: *birth date* 
 (with *gender mark*) and *serial number* with *check digit*. It is commonly known as *Birth Number* 
 or *rodné číslo* in both Czech and Slovak hence the library name. 
-</p>
-
 
 ## Install
 
