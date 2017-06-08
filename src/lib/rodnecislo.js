@@ -4,54 +4,6 @@
 // license : MIT
 // github.com/kub1x/rodnecislo
 
-/**
- * PIN_RE = RegExp pro rodné číslo (Personal Identification Number). Lomítko je moznou součástí.
- *
- * 1 - 00-99 pro první dvojčíslí (ročník)
- * 2 - pro druhé dvojčíslí
- *   a - 01-12 (měsíc muž)
- *   b - 21-32 (měsíc muž, viz: *@)
- *   c - 51-62 (měsíc žena)
- *   d - 71-82 (měsíc žena, viz: *@)
- * 3 - 01-31 pro třetí dvojčíslí (den)
- * 4 - lomítko
- * 5 - 000-9999 pro část za lomítkem
- *
- * *@: Od roku 2004 (zákonem č. 53/2004 Sb.) je zavedena možnost v případě, že
- * jsou v nějaký den vyčerpána všechna platná čtyřčíslí, použít alternativní
- * rodné číslo, u kterého mají muži k číslu měsíce přičteno číslo 20 a ženy 70.
- *
- * / |   1   |      2a      |       2b      |       2c      |       2d       |             3          |4 |    5   | /
- * /^\d{0,2}((0[1-9]|1[0-2])|(2[1-9]|3[0-2])|(5[1-9]|6[0-2])|(7[1-9]|8[0-2]))(0[1-9]|[1-2][0-9]|3[01])\/?[0-9]{3,4}$/;
- */
-
-/**
- * HISTORY
- * before 1953
- *  - format "yymmdd/xxx"
- *  - women have mm+50
- *  - xxx is birth order in the day
- *
- * after 1953
- *  - format "yymmdd/xxxc"
- *  - women have mm+50
- *  - whole pin is divisible by 11
- *  - if (+"yymmddxxx" % 11 === 10 && "c" === "0") then the pin is valid
- *
- * after 1985
- *  - the "pin % 11 === 10" exception was removed
- *
- * after 2004
- *  - men can also have mm+20
- *  - women can also have mm+70
- *
- * THUS
- * - short format  =>  before 1953
- * - long format and yy < 53  =>  yyyy = 20yy
- * - who knows what comes after 2053...
- *
- */
-
 const GENDER = {
   MALE: 'MALE',
   FEMALE: 'FEMALE'
@@ -73,9 +25,9 @@ export function RodneCislo(value) {
   // Validation
   let _error = null;
 
-  this.year = () => +_YYYY;
-  this.month = () => +_M;
-  this.day = () => +_D;
+  this.year = () => _YYYY;
+  this.month = () => _M;
+  this.day = () => _D;
 
   this.birthDate = () => new Date(_YYYY, _M, _D);
   this.birthDateAsString = () => `${_D}.${_M + MONTH_OFFSET}.${_YYYY}`;
@@ -84,8 +36,8 @@ export function RodneCislo(value) {
   this.isMale = () => _gender === GENDER.MALE;
   this.isFemale = () => _gender === GENDER.FEMALE;
 
-  this.isValid = () => { return !_error; };
-  this.error = () => { return _error; };
+  this.isValid = () => !_error;
+  this.error = () => _error;
 
   this.isAdult = (adulthood = DEFAULT_ADULTHOOD) => this.age() >= adulthood;
 
