@@ -2,7 +2,7 @@ import sinon from 'sinon';
 import test from 'ava';
 import 'babel-core/register';
 
-import { rodnecislo, RodneCislo } from '../src/lib/';
+import { rodnecislo, RodneCislo } from '../src/lib/rodnecislo';
 
 // Mock new Date()
 
