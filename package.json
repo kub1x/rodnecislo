@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "A package for handling Czech and Slovak Personal ID",
   "main": "lib/index.js",
+  "types": "lib/rodnecislo.d.ts",
   "files": [
     "lib/"
   ],
