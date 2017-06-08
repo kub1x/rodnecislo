@@ -55,7 +55,8 @@ export function RodneCislo(value) {
 
     // We're on the MONTH of the bday.
 
-    return (CD > _D) ? age : --age;
+    // NOTE In Czech you reach certain age at the beginning of your birthday.
+    return (CD >= _D) ? age : --age;
   };
 
   this.toDIC = () => `CZ${_yy}${_mm}${_dd}${_xxx}`;

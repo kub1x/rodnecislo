@@ -73,13 +73,13 @@ test('rodne cislo parses the birth date', (t) => {
 
 test('rodne cislo finds out who is adult (over 18)', (t) => {
   t.true(rodnecislo('990130/1113').isAdult());
-  t.false(rodnecislo('990131/1112').isAdult());
+  t.true(rodnecislo('990131/1112').isAdult());
   t.false(rodnecislo('990201/1119').isAdult());
 
   const US_ADULTHOOD_AGE = 21;
 
   t.true(rodnecislo('960130/1413').isAdult(US_ADULTHOOD_AGE));
-  t.false(rodnecislo('960131/1412').isAdult(US_ADULTHOOD_AGE));
+  t.true(rodnecislo('960131/1412').isAdult(US_ADULTHOOD_AGE));
   t.false(rodnecislo('960201/1419').isAdult(US_ADULTHOOD_AGE));
 });
 
@@ -88,7 +88,7 @@ test('rodne cislo returns age', (t) => {
   const Y18 = 18;
 
   t.is(rodnecislo('990130/1113').age(), Y18);
-  t.is(rodnecislo('990131/1112').age(), Y17);
+  t.is(rodnecislo('990131/1112').age(), Y18);
   t.is(rodnecislo('990201/1119').age(), Y17);
 });
 
