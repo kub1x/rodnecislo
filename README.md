@@ -66,6 +66,13 @@ rc.toDIC()     // "CZ1112133121" - Czech Tax Identification Number (DIč)
 
 ## Definitions and legislation
 
+### Dictionary
+* *birth number* - a National identification number in Czech and Slovak republic
+* *birth date part* - first 6 digits of *birth number*, typically divided with *serial number* with slash '/'
+* *serial number* - 3 digits diferentiating people born on the same day, occurs after '/'
+* *check digit* - last digit of the *birth number*, making it divisible by 11 (with exceptions)
+* *DIC* - czech VAT number
+
 ### Sources
 Specification comes mainly from following links: 
  * [Rodné číslo - sk wiki](https://sk.wikipedia.org/wiki/Rodn%C3%A9_%C4%8D%C3%ADslo)
@@ -135,30 +142,40 @@ So to flatten the knowledge:
   - Whole *birth number* without *check digit* modulo `11` equals `10` AND *check digit* is `0` AND year is `54-85` - valid *birth number*
   
 ### Age and Adultood
-I'm currently veryfying with legal offices, whether a person is adult from the midnight of his/her birthday or the day after. 
+
+According to *Civil code §601 law n. 89/2012* and *§30 of New Civil Code* an
+age is reached at midnight which is starting the birthday. So on the first
+seconds of your 18th birthday you can start drinking in Czech. 
+
 
 ### VAT Identification Number
-In Czech the personal [VAT Identification Number](https://en.wikipedia.org/wiki/VAT_identification_number#European_Union_VAT_identification_numbers) is derived from *Birth Number* by adding `CZ` prefix and ommitting the slash. It is called [Daňové identifikační číslo (DIČ)](https://cs.wikipedia.org/wiki/Da%C5%88ov%C3%A9_identifika%C4%8Dn%C3%AD_%C4%8D%C3%ADslo) hence the `.toDIC()` method. 
+
+In Czech the personal [VAT Identification Number](https://en.wikipedia.org/wiki/VAT_identification_number#European_Union_VAT_identification_numbers)
+is derived from *Birth Number* by adding `CZ` prefix and ommitting the slash.
+It is called [Daňové identifikační číslo (DIČ)](https://cs.wikipedia.org/wiki/Da%C5%88ov%C3%A9_identifika%C4%8Dn%C3%AD_%C4%8D%C3%ADslo)
+hence the `.toDIC()` method. 
+
 
 ## TODOs
 
 ### Knowledge
- * What is the age of a person on his/her birth day? 
  * What happens to *birth number* in 2053?
  * How many colisions in *birth number* are there?
  
 ### Programming
- * Make it definitelytyped.org
  * Add optional support for momentjs.com
  * Build into jQuery plugin
+
 
 ## Author
 
 Jakub Podlaha j.podlaha@gmail.com
 
+
 ## License
 
 - **MIT** : http://opensource.org/licenses/MIT
+
 
 ## Contributing
 
