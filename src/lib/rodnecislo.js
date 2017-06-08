@@ -32,6 +32,8 @@ export function RodneCislo(value) {
   this.birthDate = () => new Date(_YYYY, _M, _D);
   this.birthDateAsString = () => `${_D}.${_M + MONTH_OFFSET}.${_YYYY}`;
 
+  this.dic = () => `CZ${_yy}${_mm}${_dd}${_xxx}`;
+
   this.gender = () => _gender;
   this.isMale = () => _gender === GENDER.MALE;
   this.isFemale = () => _gender === GENDER.FEMALE;
@@ -58,8 +60,6 @@ export function RodneCislo(value) {
     // NOTE In Czech you reach certain age at the beginning of your birthday.
     return (CD >= _D) ? age : --age;
   };
-
-  this.toDIC = () => `CZ${_yy}${_mm}${_dd}${_xxx}`;
 
 
   /**

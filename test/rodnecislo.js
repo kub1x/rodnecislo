@@ -93,7 +93,7 @@ test('rodne cislo returns age', (t) => {
 });
 
 test('rodne cislo generates DIC', (t) => {
-  t.is(rodnecislo('990130/1113').toDIC(), 'CZ9901301113');
-  t.is(rodnecislo('990131/1112').toDIC(), 'CZ9901311112');
-  t.is(rodnecislo('990201/1119').toDIC(), 'CZ9902011119');
+  t.is(rodnecislo('990130/1113').dic(), 'CZ9901301113');
+  t.is(rodnecislo('990131/1112').dic(), 'CZ9901311112');
+  t.is(rodnecislo('990201/1119').dic(), 'CZ9902011119');
 });

@@ -61,7 +61,7 @@ rc.isAdult(21) // false - for US
 
 rc.age()       // 5 - age today (it is 5.6.2017 ;)
 
-rc.toDIC()     // "CZ1112133121" - Czech Tax Identification Number (DIč)
+rc.dic()     // "CZ1112133121" - Czech Tax Identification Number (DIč)
 ```
 
 ## Definitions and legislation
@@ -153,7 +153,7 @@ seconds of your 18th birthday you can start drinking in Czech.
 In Czech the personal [VAT Identification Number](https://en.wikipedia.org/wiki/VAT_identification_number#European_Union_VAT_identification_numbers)
 is derived from *Birth Number* by adding `CZ` prefix and ommitting the slash.
 It is called [Daňové identifikační číslo (DIČ)](https://cs.wikipedia.org/wiki/Da%C5%88ov%C3%A9_identifika%C4%8Dn%C3%AD_%C4%8D%C3%ADslo)
-hence the `.toDIC()` method. 
+hence the `.dic()` method. 
 
 
 ## TODOs
