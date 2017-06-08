@@ -1,6 +1,6 @@
 {
   "name": "rodnecislo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A package for handling Czech and Slovak Personal ID",
   "main": "lib/rodnecislo.js",
   "types": "lib/rodnecislo.d.ts",
