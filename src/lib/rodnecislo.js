@@ -104,8 +104,8 @@ export function RodneCislo(value) {
       if (_longFormat) {
         whole = `${match[MATCH_YY]}${match[MATCH_MM]}${match[MATCH_DD]}${match[MATCH_XX]}`;
         test = +whole.slice(BEGIN, LAST); // all but last
-        check = +whole.slice(LAST);       // the last digit
-        whole = +whole;                   // all of it
+        check = +whole.slice(LAST); // the last digit
+        whole = +whole; // all of it
       }
 
     } catch (e) {
