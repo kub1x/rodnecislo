@@ -4,6 +4,9 @@
   <a href="https://npmjs.org/package/rodnecislo">
     <img src="https://img.shields.io/npm/v/rodnecislo.svg" alt="NPM Version">
   </a>
+  <a href="https://npmjs.org/package/generator-np">
+    <img src="https://img.shields.io/npm/dm/rodnecislo.svg" alt="NPM downloads">
+  </a>
   <a href="http://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/npm/l/rodnecislo.svg" alt="License">
   </a>
