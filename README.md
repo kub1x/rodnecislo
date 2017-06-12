@@ -41,6 +41,8 @@ npm install rodnecislo
 
 ```javascript
 import { rodnecislo } from 'rodnecislo';
+// or using require:
+// let { rodnecislo } = require("rodnecislo")
 
 let rc = rodnecislo('111213/3121');
 
@@ -61,7 +63,7 @@ rc.isAdult(21) // false - for US
 
 rc.age()       // 5 - age today (it is 5.6.2017 ;)
 
-rc.dic()     // "CZ1112133121" - Czech Tax Identification Number (DIč)
+rc.dic()       // "CZ1112133121" - Czech Tax Identification Number (DIč)
 ```
 
 ## Definitions and legislation
