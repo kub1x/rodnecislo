@@ -1,5 +1,5 @@
 // rodnecislo.js
-// version : 0.0.1
+// version : 1.0.0
 // authors : Jakub Podlaha
 // license : MIT
 // github.com/kub1x/rodnecislo
