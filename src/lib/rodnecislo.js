@@ -195,5 +195,3 @@ export function RodneCislo(value) {
 export function rodnecislo(value) {
   return new RodneCislo(value);
 }
-
-rodnecislo.version = '0.0.2';

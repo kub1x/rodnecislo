@@ -23,7 +23,7 @@
     "audit": "nsp check package",
     "watch": "babel ./src --out-dir ./ --source-maps inline --copy-files --watch",
     "build": "babel ./src --out-dir ./ --source-maps inline --copy-files",
-    "check": "npm run audit && npm outdated --depth 0",
+    "check": "npm run audit && ncu && npm outdated --depth 0",
     "coverage": "nyc --reporter=lcov --reporter=text --reporter=html npm test",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
     "github-release": "conventional-github-releaser -p angular",
@@ -58,12 +58,13 @@
     "coveralls": "^2.13.1",
     "cz-conventional-changelog": "^2.0.0",
     "eslint": "^4.0.0",
+    "npm-check-updates": "^2.11.3",
     "nsp": "^2.6.3",
     "nyc": "^11.0.2",
     "pmm": "^1.3.1",
     "pre-commit": "^1.2.2",
     "sinon": "^2.3.4",
-    "typescript": "^2.3.4"
+    "typescript": "^2.4.0"
   },
   "config": {
     "commitizen": {
