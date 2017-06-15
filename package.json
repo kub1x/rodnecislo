@@ -21,8 +21,8 @@
   },
   "scripts": {
     "audit": "nsp check package",
-    "watch": "babel ./src --out-dir ./ --source-maps inline --copy-files --watch",
-    "build": "babel ./src --out-dir ./ --source-maps inline --copy-files",
+    "watch": "babel ./src --out-dir ./ --copy-files --watch",
+    "build": "babel ./src --out-dir ./ --copy-files",
     "check": "npm run audit && ncu && npm outdated --depth 0",
     "coverage": "nyc --reporter=lcov --reporter=text --reporter=html npm test",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
