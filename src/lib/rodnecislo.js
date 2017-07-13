@@ -14,9 +14,8 @@ const DEFAULT_ADULTHOOD = 18;
 
 export function RodneCislo(value) {
 
-  // PIN parts
+  // PIN parts and Parsed birthdate
   let _yy, _mm, _dd, _xxx,
-  // Parsed birthdate
     _D, _M, _YYYY;
   // Gender
   let _gender = 'MALE';
