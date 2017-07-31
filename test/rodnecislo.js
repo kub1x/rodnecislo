@@ -97,3 +97,9 @@ test('rodne cislo generates DIC', (t) => {
   t.is(rodnecislo('990131/1112').dic(), 'CZ9901311112');
   t.is(rodnecislo('990201/1119').dic(), 'CZ9902011119');
 });
+
+test('rodne cislo enables +20 offset only for year >=2004', (t) => {
+  t.false(rodnecislo('222222/222').isValid());
+  t.true(rodnecislo('222222/2222').isValid());
+});
+
