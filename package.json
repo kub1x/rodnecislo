@@ -54,7 +54,7 @@
     "babel-eslint": "^7.2.3",
     "babel-plugin-transform-function-bind": "^6.22.0",
     "babel-preset-es2015": "^6.24.1",
-    "conventional-github-releaser": "^1.1.12",
+    "conventional-github-releaser": "^2.0.0",
     "coveralls": "^2.13.1",
     "cz-conventional-changelog": "^2.0.0",
     "eslint": "^4.4.1",
