@@ -25,16 +25,18 @@
   <a href="https://greenkeeper.io/">
     <img src="https://badges.greenkeeper.io/kub1x/rodnecislo.svg" alt="Greenkeeper badge">
   </a>
-  
+
 </p>
 
-A npm package for validating and deriving information from [Czech and Slovak National Identification Number](https://en.wikipedia.org/wiki/National_identification_number#Czech_Republic_and_Slovakia). 
-This number is used in Czech and Slovak Republic as the primary unique identifier for every person 
-by most, if not all, government institutions, banks, etc. It consists of two parts: *birth date* 
-(with *gender mark*) and *serial number* with *check digit*. It is commonly known as *Birth Number* 
-or *rodné číslo* in both Czech and Slovak hence the library name. 
+A npm package for validating and deriving information from [Czech and Slovak National Identification Number](https://en.wikipedia.org/wiki/National_identification_number#Czech_Republic_and_Slovakia).
+This number is used in Czech and Slovak Republic as the primary unique identifier for every person
+by most, if not all, government institutions, banks, etc. It consists of two parts: *birth date*
+(with *gender mark*) and *serial number* with *check digit*. It is commonly known as *Birth Number*
+or *rodné číslo* in both Czech and Slovak hence the library name.
 
 ## Install
+
+Works with nodejs v6 and higer (ES2015).
 
 ```sh
 npm install rodnecislo
@@ -79,7 +81,7 @@ rc.dic()       // "CZ1112133121" - Czech Tax Identification Number (DIč)
 * *DIC* - czech VAT number
 
 ### Sources
-Specification comes mainly from following links: 
+Specification comes mainly from following links:
  * [Rodné číslo - sk wiki](https://sk.wikipedia.org/wiki/Rodn%C3%A9_%C4%8D%C3%ADslo)
  * [Rodné číslo - cz wiki](https://cs.wikipedia.org/wiki/Rodn%C3%A9_%C4%8D%C3%ADslo)
  * [National identification number - Czech and Slovak birth number - en wiki](https://en.wikipedia.org/wiki/National_identification_number#Czech_Republic_and_Slovakia)
@@ -94,7 +96,7 @@ RegExp for *rodné číslo*. With/without slash.
 /^\d{0,2}((0[1-9]|1[0-2])|(2[1-9]|3[0-2])|(5[1-9]|6[0-2])|(7[1-9]|8[0-2]))(0[1-9]|[1-2][0-9]|3[01])\/?[0-9]{3,4}$/;
 ```
 
-Explanation: 
+Explanation:
 * 1 - 00-99 birth year
 * 2 birth month
   - a - 01-12 for men
@@ -105,14 +107,14 @@ Explanation:
 * 4 - slash
 * 5 - 000-9999 serial and check digit
 
-> \* Since 2004 (law nr. 53/2004) it is possible to add extra 20 to the month number in case the number 
-> of newborns exceeds all the possible combinations of birth date/birth number divisible by 11. 
+> \* Since 2004 (law nr. 53/2004) it is possible to add extra 20 to the month number in case the number
+> of newborns exceeds all the possible combinations of birth date/birth number divisible by 11.
 
 ### Historical evolution
 
 * Before 1953
-  - People in Czechoslovakia have *Personal ID Card Number* or 
-    *Work ID Card Number*. It isn't called *birth number*/*rodne cislo* yet. 
+  - People in Czechoslovakia have *Personal ID Card Number* or
+    *Work ID Card Number*. It isn't called *birth number*/*rodne cislo* yet.
   - It has format `yymmdd/sss`
   - Women have `mm+50`
   - `sss` is *serial number* for people born on the same day
@@ -132,7 +134,7 @@ Explanation:
   - Men can also have `mm+20`
   - Women can also have `mm+70`
 
-So to flatten the knowledge: 
+So to flatten the knowledge:
 * Short/long version
   - Short version was used before 1953
   - Long version AND `yy >= 54` THEN `yyyy = 19yy`
@@ -145,12 +147,12 @@ So to flatten the knowledge:
   - Short *birth number* - no modulo condition
   - Whole *birth number* is divisible by 11 - valid *birth number*
   - Whole *birth number* without *check digit* modulo `11` equals `10` AND *check digit* is `0` AND year is `54-85` - valid *birth number*
-  
+
 ### Age and Adultood
 
 According to *Civil code §601 law n. 89/2012* and *§30 of New Civil Code* an
 age is reached at midnight which is starting the birthday. So on the first
-seconds of your 18th birthday you can start drinking in Czech. 
+seconds of your 18th birthday you can start drinking in Czech.
 
 
 ### VAT Identification Number
@@ -158,7 +160,7 @@ seconds of your 18th birthday you can start drinking in Czech.
 In Czech the personal [VAT Identification Number](https://en.wikipedia.org/wiki/VAT_identification_number#European_Union_VAT_identification_numbers)
 is derived from *Birth Number* by adding `CZ` prefix and ommitting the slash.
 It is called [Daňové identifikační číslo (DIČ)](https://cs.wikipedia.org/wiki/Da%C5%88ov%C3%A9_identifika%C4%8Dn%C3%AD_%C4%8D%C3%ADslo)
-hence the `.dic()` method. 
+hence the `.dic()` method.
 
 
 ## TODOs
@@ -166,7 +168,7 @@ hence the `.dic()` method.
 ### Knowledge
  * What happens to *birth number* in 2053?
  * How many colisions in *birth number* are there?
- 
+
 ### Programming
  * Add optional support for momentjs.com
  * Build into jQuery plugin
