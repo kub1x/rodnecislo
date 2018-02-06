@@ -18,7 +18,7 @@ export function RodneCislo(value) {
   let _yy, _mm, _dd, _xxx,
     _D, _M, _YYYY;
   // Gender
-  let _gender = 'MALE';
+  let _gender = GENDER.MALE;
   // PIN attributes
   let _longFormat = false;
   // Validation
@@ -133,16 +133,7 @@ export function RodneCislo(value) {
   const WOMAN_MM_ADDITION = 50;
   const EXTRA_MM_ADDITION = 20;
 
-  function isDateValid(y, m, d) {
-    const date = new Date(y, m, d);
-    const convertedDate = `${date.getFullYear()}${date.getMonth()}${date.getDate()}`;
-    const givenDate = `${y}${m}${d}`;
-
-    return (givenDate === convertedDate);
-  }
-
-  function parseBirthDate() {
-    // Year
+  function parseBirthYear() {
     _YYYY = +_yy;
     if (!_longFormat && _YYYY <= YEAR53) {
       // since ever - 31.12.1953
@@ -159,7 +150,10 @@ export function RodneCislo(value) {
       _error = 'We didn\'t think about this yet...';
       return false;
     }
+    return true;
+  }
 
+  function parseBirthMonth() {
     // Month and Gender
     _M = +_mm;
 
@@ -184,13 +178,26 @@ export function RodneCislo(value) {
     _M -= MONTH_OFFSET;
     _D = +_dd;
 
+    return true;
+  }
+
+  function doesBirthdateExist() {
+    const date = new Date(_YYYY, _M, _D);
+    const convertedDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    const givenDate = `${_YYYY}-${_M}-${_D}`;
+
     // Final birthdate validation
-    if (!isDateValid(_YYYY, _M, _D)) {
+    if (givenDate !== convertedDate) {
       _error = 'Invalid birth date';
       return false;
     }
-
     return true;
+  }
+
+  function parseBirthDate() {
+    return parseBirthYear()
+      && parseBirthMonth()
+      && doesBirthdateExist();
   }
 
   parseRawInput(value);
