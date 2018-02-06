@@ -1,8 +1,7 @@
 // rodnecislo.js
-// version : 1.0.0
 // authors : Jakub Podlaha
 // license : MIT
-// github.com/kub1x/rodnecislo
+// repo: github.com/kub1x/rodnecislo
 
 const GENDER = {
   MALE: 'MALE',
@@ -11,6 +10,7 @@ const GENDER = {
 
 const MONTH_OFFSET = 1;
 const DEFAULT_ADULTHOOD = 18;
+const AGE_WHEN_BORN = 0;
 
 export function RodneCislo(value) {
 
@@ -37,7 +37,8 @@ export function RodneCislo(value) {
   this.isMale = () => _gender === GENDER.MALE;
   this.isFemale = () => _gender === GENDER.FEMALE;
 
-  this.isValid = () => !_error;
+  this.isValid = () => !_error && this.age() >= AGE_WHEN_BORN;
+  this.isPossible = () => !_error;
   this.error = () => _error;
 
   this.isAdult = (adulthood = DEFAULT_ADULTHOOD) => this.age() >= adulthood;

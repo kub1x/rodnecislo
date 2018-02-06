@@ -37,7 +37,9 @@ test('rodne cislo is invalid for invalid values', (t) => {
   t.false(rodnecislo('sadf').isValid());
   t.false(rodnecislo('123').isValid());
   t.false(rodnecislo('000000/0000').isValid());
-  t.false(rodnecislo('110124/0422').isValid()); // Invalid %11 condition
+  t.false(rodnecislo('110124/0422').isValid()); // Invalid modulo 11 condition
+  t.false(rodnecislo('521111/1114').isValid()); // Birth date in future is invalid
+  t.true(rodnecislo('521111/1114').isPossible()); // Birth date in future is possible
 });
 
 test('rodne cislo is valid for valid values', (t) => {
@@ -92,6 +94,24 @@ test('rodne cislo returns age', (t) => {
   t.is(rodnecislo('990201/1119').age(), Y17);
 });
 
+test('rodne cislo returns negative age when born tomorrow', (t) => {
+  const Y100 = 100;
+  const MONTH_INDEX = 0;
+  const DAY_INCREMENT = 0;
+  const REQUIRED_AGE = -1;
+  const MODULO11 = 11;
+
+  const now = new Date();
+  const YY = now.getFullYear() % Y100; // Last two digits
+  const MM = now.getMonth() + MONTH_INDEX; // Months starts from 0
+  const DD = now.getDate() + DAY_INCREMENT; // Tomorrow!
+  let RC = `${YY}${MM}${DD}0000`; // Add four digits suffix
+
+  RC += MODULO11 - RC % MODULO11; // Fix the modulo condition
+
+  t.is(rodnecislo(RC).age(), REQUIRED_AGE);
+});
+
 test('rodne cislo generates DIC', (t) => {
   t.is(rodnecislo('990130/1113').dic(), 'CZ9901301113');
   t.is(rodnecislo('990131/1112').dic(), 'CZ9901311112');
@@ -100,6 +120,7 @@ test('rodne cislo generates DIC', (t) => {
 
 test('rodne cislo enables +20 offset only for year >=2004', (t) => {
   t.false(rodnecislo('222222/222').isValid());
-  t.true(rodnecislo('222222/2222').isValid());
+  t.false(rodnecislo('222222/2222').isValid());
+  t.true(rodnecislo('222222/2222').isPossible());
 });
 

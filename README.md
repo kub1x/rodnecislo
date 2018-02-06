@@ -49,26 +49,27 @@ import { rodnecislo } from 'rodnecislo';
 // or using require:
 // let { rodnecislo } = require("rodnecislo")
 
-let rc = rodnecislo('111213/3121');
+let rc = rodnecislo('111213/3121')
 
-rc.isMale();   // true
-rc.isFemale(); // false
+rc.isMale()     // true
+rc.isFemale()   // false
 
-rc.year();     // 2011
-rc.month();    // 11 - zero based month
-rc.day();      // 13
+rc.year()       // 2011
+rc.month()      // 11 - zero based month
+rc.day()        // 13
 
-rc.birthDate() // new Date(2011, 11, 13) - "Tue Dec 13 2011 00:00:00 GMT+0100 (CET)"
+rc.birthDate()  // new Date(2011, 11, 13) - "Tue Dec 13 2011 00:00:00 GMT+0100 (CET)"
 rc.birthDateAsString() // "13.12.2011" - the Czech date format
 
-rc.isValid()   // true
+rc.isValid()    // true
+rc.isPossible() // true (valid, but maybe in the future)
 
-rc.isAdult()   // false - by default checks if current date is above 18 years old
-rc.isAdult(21) // false - for US
+rc.isAdult()    // false - by default checks if current date is above 18 years old
+rc.isAdult(21)  // false - for US
 
-rc.age()       // 5 - age today (it is 5.6.2017 ;)
+rc.age()        // 5 - age today (it is 5.6.2017 ;)
 
-rc.dic()       // "CZ1112133121" - Czech Tax Identification Number (DIč)
+rc.dic()        // "CZ1112133121" - Czech Tax Identification Number (DIč)
 ```
 
 ## Definitions and legislation
