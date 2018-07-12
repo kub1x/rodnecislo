@@ -124,3 +124,7 @@ test('rodne cislo enables +20 offset only for year >=2004', (t) => {
   t.true(rodnecislo('222222/2222').isPossible());
 });
 
+test.only('rodne cislo is valid for reported numbers', (t) => {
+  t.true(rodnecislo('535517319').isValid());
+  t.true(rodnecislo('535325410').isValid());
+});
