@@ -57,7 +57,7 @@
     "coveralls": "^3.0.0",
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^5.1.0",
-    "nyc": "^12.0.2",
+    "nyc": "^13.2.0",
     "pmm": "^2.0.0",
     "pre-commit": "^1.2.2",
     "sinon": "^6.1.3",
