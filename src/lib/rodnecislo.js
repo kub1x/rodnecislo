@@ -18,10 +18,13 @@ export function RodneCislo(value) {
   let _yy, _mm, _dd, _xxx,
     _D, _M, _YYYY;
   // Gender
+
   let _gender = GENDER.MALE;
   // PIN attributes
+
   let _longFormat = false;
   // Validation
+
   let _error = null;
 
   this.year = () => _YYYY;

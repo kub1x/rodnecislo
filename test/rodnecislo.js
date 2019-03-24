@@ -1,21 +1,19 @@
 import sinon from 'sinon';
 import test from 'ava';
-import 'babel-core/register';
 
 import { rodnecislo, RodneCislo } from '../src/lib/rodnecislo';
 
 // Mock new Date()
 
 const NOW_SEC = 1485865800000; // 31.1.2017 13:30
-let sandbox, clock;
+
+let clock;
 
 test.before(() => {
-  sandbox = sinon.sandbox.create();
   clock = sinon.useFakeTimers(NOW_SEC);
 });
 
 test.after(() => {
-  sandbox.restore();
   clock.restore();
 });
 
@@ -105,6 +103,7 @@ test('rodne cislo returns negative age when born tomorrow', (t) => {
   const YY = now.getFullYear() % Y100; // Last two digits
   const MM = now.getMonth() + MONTH_INDEX; // Months starts from 0
   const DD = now.getDate() + DAY_INCREMENT; // Tomorrow!
+
   let RC = `${YY}${MM}${DD}0000`; // Add four digits suffix
 
   RC += MODULO11 - RC % MODULO11; // Fix the modulo condition
