@@ -45,7 +45,8 @@
     "outdated",
     "build",
     "lint",
-    "test"
+    "test",
+    "typescript-test"
   ],
   "devDependencies": {
     "@babel/cli": "^7.6.4",
@@ -55,9 +56,9 @@
     "ava": "^2.4.0",
     "babel-eslint": "^10.0.3",
     "conventional-github-releaser": "^3.1.3",
-    "coveralls": "^3.0.6",
+    "coveralls": "^3.0.7",
     "cz-conventional-changelog": "^3.0.2",
-    "eslint": "^6.5.1",
+    "eslint": "^6.6.0",
     "nyc": "^14.1.1",
     "pmm": "^2.0.0",
     "pre-commit": "^1.2.2",
