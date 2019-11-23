@@ -48,19 +48,19 @@
     "typescript-test"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.6.4",
-    "@babel/core": "^7.6.4",
-    "@babel/preset-env": "^7.6.3",
-    "@babel/register": "^7.6.2",
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/register": "^7.7.4",
     "ava": "^2.4.0",
     "babel-eslint": "^10.0.3",
-    "coveralls": "^3.0.7",
-    "eslint": "^6.6.0",
+    "coveralls": "^3.0.8",
+    "eslint": "^6.7.0",
     "nyc": "^14.1.1",
     "pmm": "^2.0.0",
     "pre-commit": "^1.2.2",
     "sinon": "^7.5.0",
-    "typescript": "^3.6.4"
+    "typescript": "^3.7.2"
   },
   "ava": {
     "files": [
