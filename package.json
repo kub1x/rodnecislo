@@ -35,7 +35,7 @@
     "patch": "pmm patch"
   },
   "author": {
-    "name": "Jakub kub1x Podlaha",
+    "name": "Jakub Podlaha",
     "email": "j.podlaha@gmail.com",
     "url": "http://kub1x.org"
   },
@@ -54,8 +54,8 @@
     "@babel/register": "^7.7.4",
     "ava": "^2.4.0",
     "babel-eslint": "^10.0.3",
-    "coveralls": "^3.0.8",
-    "eslint": "^6.7.0",
+    "coveralls": "^3.0.9",
+    "eslint": "^6.7.2",
     "nyc": "^14.1.1",
     "pmm": "^2.0.0",
     "pre-commit": "^1.2.2",
