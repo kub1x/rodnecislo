@@ -52,7 +52,7 @@
     "@babel/core": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
     "@babel/register": "^7.7.4",
-    "ava": "^2.4.0",
+    "ava": "^3.0.0",
     "babel-eslint": "^10.0.3",
     "coveralls": "^3.0.9",
     "eslint": "^6.7.2",
