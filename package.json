@@ -49,18 +49,18 @@
   ],
   "devDependencies": {
     "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
-    "@babel/register": "^7.8.3",
-    "ava": "^3.2.0",
-    "babel-eslint": "^10.0.3",
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/register": "^7.8.6",
+    "ava": "^3.5.0",
+    "babel-eslint": "^10.1.0",
     "coveralls": "^3.0.9",
     "eslint": "^6.8.0",
     "nyc": "^15.0.0",
     "pmm": "^2.0.0",
     "pre-commit": "^1.2.2",
-    "sinon": "^8.1.1",
-    "typescript": "^3.7.5"
+    "sinon": "^9.0.1",
+    "typescript": "^3.8.3"
   },
   "ava": {
     "files": [
