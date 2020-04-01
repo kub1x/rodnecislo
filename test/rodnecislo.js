@@ -38,6 +38,9 @@ test('rodne cislo is invalid for invalid values', (t) => {
   t.false(rodnecislo('110124/0422').isValid()); // Invalid modulo 11 condition
   t.false(rodnecislo('521111/1114').isValid()); // Birth date in future is invalid
   t.true(rodnecislo('521111/1114').isPossible()); // Birth date in future is possible
+  t.true(rodnecislo('9206278653').isValid());
+  t.false(rodnecislo('9206278653415161131868186').isValid());
+  t.false(rodnecislo('9206278653fwefwefewfe').isValid());
 });
 
 test('rodne cislo is valid for valid values', (t) => {

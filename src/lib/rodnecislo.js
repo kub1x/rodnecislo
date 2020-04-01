@@ -69,7 +69,7 @@ export function RodneCislo(value) {
    * with OR without slash '/' between date part and distinction part
    * with 3 OR 4 digits of distinction part
    */
-  const RODNECISLO_RE = /(\d\d)(\d\d)(\d\d)\/?(\d\d\d\d?)/;
+  const RODNECISLO_RE = /^(\d\d)(\d\d)(\d\d)\/?(\d\d\d\d?)$/;
   const MATCH_YY = 1;
   const MATCH_MM = 2;
   const MATCH_DD = 3;
