@@ -51,7 +51,7 @@
     "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
-    "@babel/register": "^7.9.0",
+    "@babel/register": "^7.10.1",
     "ava": "^3.5.2",
     "babel-eslint": "^10.1.0",
     "coveralls": "^3.0.11",
