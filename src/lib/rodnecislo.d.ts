@@ -1,6 +1,7 @@
 export function rodnecislo(rc: string): RodneCislo;
 
 export interface RodneCislo {
+  isPossible(): boolean
   isValid(): boolean
 
   isMale(): boolean
