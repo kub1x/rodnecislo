@@ -30,9 +30,6 @@
     "test": "ava",
     "test:watch": "ava --watch",
     "typescript-test": "tsc --project test",
-    "major": "pmm major",
-    "minor": "pmm minor",
-    "patch": "pmm patch",
     "prepare": "husky"
   },
   "author": {
@@ -51,7 +48,6 @@
     "eslint-plugin-jsdoc": "^60.1.1",
     "husky": "^9.1.7",
     "nyc": "^17.1.0",
-    "pmm": "^2.0.0",
     "sinon": "^21.0.0",
     "typescript": "^5.9.2"
   },
