@@ -16,10 +16,6 @@
   <a href="https://coveralls.io/github/kub1x/rodnecislo">
     <img src="https://img.shields.io/coveralls/kub1x/rodnecislo.svg" alt="Coveralls">
   </a>
-  <a href="https://greenkeeper.io/">
-    <img src="https://badges.greenkeeper.io/kub1x/rodnecislo.svg" alt="Greenkeeper badge">
-  </a>
-
 </p>
 
 A npm package for validating and deriving information from [Czech and Slovak National Identification Number](https://en.wikipedia.org/wiki/National_identification_number#Czech_Republic_and_Slovakia).
