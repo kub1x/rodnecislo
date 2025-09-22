@@ -1,7 +1,7 @@
 import sinon from 'sinon';
 import test from 'ava';
 
-import { rodnecislo, RodneCislo } from '../src/lib/rodnecislo';
+import { rodnecislo, RodneCislo } from '../src/lib/rodnecislo.mjs';
 
 // Mock new Date()
 

@@ -2,8 +2,9 @@
   "name": "rodnecislo",
   "version": "1.6.0",
   "description": "A package for handling Czech and Slovak Personal ID",
-  "main": "lib/rodnecislo.js",
+  "main": "lib/rodnecislo.mjs",
   "types": "lib/rodnecislo.d.ts",
+  "type": "module",
   "files": [
     "lib/"
   ],
@@ -25,46 +26,38 @@
     "build": "babel ./src --out-dir ./ --copy-files",
     "outdated": "$npm_execpath outdated --depth 0",
     "coverage": "nyc --reporter=lcov --reporter=text --reporter=html $npm_execpath test",
-    "coveralls": "$npm_execpath run coverage && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
-    "lint": "eslint src test",
+    "lint": "eslint src",
     "test": "ava",
     "test:watch": "ava --watch",
     "typescript-test": "tsc --project test",
     "major": "pmm major",
     "minor": "pmm minor",
-    "patch": "pmm patch"
+    "patch": "pmm patch",
+    "prepare": "husky"
   },
   "author": {
     "name": "Jakub Podlaha",
     "email": "j.podlaha@gmail.com",
     "url": "http://kub1x.org"
   },
-  "pre-commit": [
-    "audit",
-    "outdated",
-    "build",
-    "lint",
-    "test",
-    "typescript-test"
-  ],
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
-    "@babel/register": "^7.9.0",
-    "ava": "^3.5.2",
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.4",
+    "@babel/preset-env": "^7.28.3",
+    "@babel/register": "^7.28.3",
+    "ava": "^6.4.1",
     "babel-eslint": "^10.1.0",
-    "coveralls": "^3.0.11",
-    "eslint": "^6.8.0",
-    "nyc": "^15.0.0",
+    "eslint": "^9.36.0",
+    "eslint-plugin-jsdoc": "^60.1.1",
+    "husky": "^9.1.7",
+    "nyc": "^17.1.0",
     "pmm": "^2.0.0",
-    "pre-commit": "^1.2.2",
-    "sinon": "^9.0.1",
-    "typescript": "^3.8.3"
+    "sinon": "^21.0.0",
+    "typescript": "^5.9.2"
   },
   "ava": {
     "files": [
-      "test/*.js"
+      "test/*.mjs"
     ],
     "require": "@babel/register"
   }
