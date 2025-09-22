@@ -24,6 +24,11 @@ by most, if not all, government institutions, banks, etc. It consists of two par
 (with *gender mark*) and *serial number* with *check digit*. It is commonly known as *Birth Number*
 or *rodné číslo* in both Czech and Slovak hence the library name.
 
+## Buy me a coffee
+If you want. 
+
+<img src="buy-me-a-coffee-qr-code.png" width="200" alt="Buy me a coffee QR payment" />
+
 ## Install
 
 Works with nodejs v10 and higer (ES2015).
