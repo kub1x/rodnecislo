@@ -13,9 +13,6 @@
   <a href="https://github.com/kub1x/rodnecislo/issues">
     <img src="https://img.shields.io/github/issues/kub1x/rodnecislo.svg" alt="Github Issues">
   </a>
-  <a href="https://travis-ci.org/kub1x/rodnecislo">
-    <img src="https://img.shields.io/travis/kub1x/rodnecislo.svg" alt="Travis Status">
-  </a>
   <a href="https://coveralls.io/github/kub1x/rodnecislo">
     <img src="https://img.shields.io/coveralls/kub1x/rodnecislo.svg" alt="Coveralls">
   </a>
