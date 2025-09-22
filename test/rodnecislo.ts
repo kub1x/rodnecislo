@@ -4,6 +4,7 @@ import { rodnecislo } from '../src/lib/rodnecislo';
 
 let rc = rodnecislo('111111/1111');
 rc.isValid();
+rc.isPossible();
 rc.isMale();
 rc.isFemale();
 rc.year();

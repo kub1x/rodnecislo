@@ -132,7 +132,6 @@ export function RodneCislo(value) {
   const YEAR53 = 53;
   const CENT19 = 1900;
   const CENT20 = 2000;
-  const YEAR2004 = 2004;
 
   const WOMAN_MM_ADDITION = 50;
   const EXTRA_MM_ADDITION = 20;
@@ -164,18 +163,12 @@ export function RodneCislo(value) {
     // Women have month + 50
     if (_M > WOMAN_MM_ADDITION) {
       _gender = GENDER.FEMALE;
-      _M %= WOMAN_MM_ADDITION;
+      _M -= WOMAN_MM_ADDITION;
     }
 
     // Sometimes men/women get extra month + 20
     if (_M > EXTRA_MM_ADDITION) {
-      if (_YYYY >= YEAR2004) {
-        _M %= EXTRA_MM_ADDITION;
-      } else {
-        // NOTE
-        _error = 'Addition of month+20 is allowed for year >= 2004 only.';
-        return false;
-      }
+      _M -= EXTRA_MM_ADDITION;
     }
 
     // Ok

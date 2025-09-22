@@ -120,9 +120,42 @@ test('rodne cislo generates DIC', (t) => {
   t.is(rodnecislo('990201/1119').dic(), 'CZ9902011119');
 });
 
-test('rodne cislo enables +20 offset only for year >=2004', (t) => {
+// Issue #53: Removed 2004 year limit for +20 addition to month. It seems
+// to be backward applicable. 
+// See: https://github.com/kub1x/rodnecislo/issues/53
+//
+// Law: Zákon č. 133/2000 Sb. - Head III - § 13 - odst. (5)
+//      https://www.zakonyprolidi.cz/cs/2000-133#p13-5
+test.skip('rodne cislo enables +20 offset only for year >=2004', (t) => {
   t.false(rodnecislo('222222/222').isValid());
   t.false(rodnecislo('222222/2222').isValid());
   t.true(rodnecislo('222222/2222').isPossible());
 });
 
+test('fix reported issue #53', (t) => {
+  // Muž,Občan,1985-02-15,850215/1988 - VALID
+  t.true(rodnecislo('850215/1988').isValid());
+  t.is(rodnecislo('850215/1988').birthDate().toUTCString(), new Date(1985, 1, 15).toUTCString());
+  // Muž,Cudzinec,1985-02-15,852215/7886 - NOT VALID BUT SHOULD BE
+  t.true(rodnecislo('852215/7886').isValid());
+  t.is(rodnecislo('852215/7886').birthDate().toUTCString(), new Date(1985, 1, 15).toUTCString());
+  // Žena,Občan,1985-02-15,855215/5117 - VALID
+  t.true(rodnecislo('855215/5117').isValid());
+  t.is(rodnecislo('855215/5117').birthDate().toUTCString(), new Date(1985, 1, 15).toUTCString());
+  // Žena,Cudzinec,1985-02-15,857215/5075 - NOT VALID BUT SHOULD BE
+  t.true(rodnecislo('857215/5075').isValid());
+  t.is(rodnecislo('857215/5075').birthDate().toUTCString(), new Date(1985, 1, 15).toUTCString());
+
+  // Muž,Občan,1940-03-15,400315/913 - VALID
+  t.true(rodnecislo('400315/913').isValid());
+  t.is(rodnecislo('400315/913').birthDate().toUTCString(), new Date(1940, 2, 15).toUTCString());
+  // Muž,Cudzinec,1940-03-15,402315/854 - NOT VALID BUT SHOULD BE
+  t.true(rodnecislo('402315/854').isValid());
+  t.is(rodnecislo('402315/854').birthDate().toUTCString(), new Date(1940, 2, 15).toUTCString());
+  // Žena,Občan,1940-03-15,405315/657 - VALID
+  t.true(rodnecislo('405315/657').isValid());
+  t.is(rodnecislo('405315/657').birthDate().toUTCString(), new Date(1940, 2, 15).toUTCString());
+  // Žena,Cudzinec,1940-03-15,407315/758 - NOT VALID BUT SHOULD BE
+  t.true(rodnecislo('407315/758').isValid());
+  t.is(rodnecislo('407315/758').birthDate().toUTCString(), new Date(1940, 2, 15).toUTCString());
+});
