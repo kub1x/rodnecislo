@@ -1,6 +1,11 @@
 /// <reference path="../lib/rodnecislo.d.ts" />
 
 import { rodnecislo, RodneCislo } from '../lib/rodnecislo';
+import type { RodneCislo as RodneCisloType } from '../lib/rodnecislo';
+
+// Test type-only import (useful for type annotations without runtime import)
+type BirthNumberValidator = RodneCisloType;
+const typeAnnotation: RodneCisloType = rodnecislo('111111/1111');
 
 // Test factory function
 let rc = rodnecislo('111111/1111');
