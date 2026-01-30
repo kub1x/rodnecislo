@@ -72,6 +72,6 @@
       "test/*.mjs",
       "test/*.cjs"
     ],
-    "require": "@babel/register"
+    "require": ["@babel/register"]
   }
 }
