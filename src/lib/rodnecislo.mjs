@@ -75,7 +75,6 @@ class RodneCislo {
 
     this.isAdult = (adulthood = DEFAULT_ADULTHOOD) => this.age() >= adulthood;
 
-
     this.#parseRawInput(value);
     this.#parseBirthDate();
   }
@@ -143,9 +142,8 @@ class RodneCislo {
       // 1.1.2000 - 31.12.2053
       this.#YYYY += CENT20;
     } else {
-      // NOTE This never happends as it would be the same as for 1954-2000
-      // 1.1.2054 - until ever
-      this.#error = 'We didn\'t think about this yet...';
+      // Short format with year > 53: malformed input or regex didn't match
+      this.#error = this.#error || 'Invalid birth year format';
       return false;
     }
     return true;
