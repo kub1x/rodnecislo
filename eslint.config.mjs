@@ -1,12 +1,11 @@
 import { defineConfig } from "eslint/config";
 import globals from "globals";
-import babelParser from "babel-eslint";
+import babelParser from "@babel/eslint-parser";
 
 export default defineConfig([{
     languageOptions: {
         globals: {
             ...globals.node,
-            ...globals.mocha,
             ...globals.browser,
         },
 
@@ -15,6 +14,7 @@ export default defineConfig([{
         sourceType: "module",
 
         parserOptions: {
+            requireConfigFile: false,
             ecmaFeatures: {
                 impliedStrict: true,
             },
@@ -41,7 +41,7 @@ export default defineConfig([{
         "no-inner-declarations": [2],
         "no-invalid-regexp": [2],
         "no-irregular-whitespace": [2],
-        "no-negated-in-lhs": [2],
+        "no-unsafe-negation": [2],
         "no-obj-calls": [2],
         "no-regex-spaces": [2],
         "no-sparse-arrays": [2],
@@ -96,7 +96,7 @@ export default defineConfig([{
 
         "no-multi-spaces": [2],
         "no-multi-str": [2],
-        "no-native-reassign": [2],
+        "no-global-assign": [2],
         "no-new": [2],
         "no-new-func": [2],
         "no-new-wrappers": [2],
@@ -207,7 +207,7 @@ export default defineConfig([{
         "no-nested-ternary": [2],
         "no-new-object": [2],
         "no-plusplus": [0],
-        "no-spaced-func": [2],
+        "func-call-spacing": [2, "never"],
         "no-ternary": [0],
         "no-trailing-spaces": [2],
         "no-underscore-dangle": [0],

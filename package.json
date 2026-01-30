@@ -1,19 +1,34 @@
 {
   "name": "rodnecislo",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "A package for handling Czech and Slovak Personal ID",
-  "main": "lib/rodnecislo.mjs",
+  "main": "lib/rodnecislo.js",
   "types": "lib/rodnecislo.d.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./lib/rodnecislo.d.ts",
+      "import": "./lib/rodnecislo.js",
+      "require": "./lib/rodnecislo.js",
+      "default": "./lib/rodnecislo.js"
+    }
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "sideEffects": false,
   "files": [
     "lib/"
   ],
   "keywords": [
-    "personal",
-    "ID",
     "Czech",
-    "node",
-    "module"
+    "Slovak",
+    "birth number",
+    "rodne cislo",
+    "rodné číslo",
+    "personal ID",
+    "national identification",
+    "validation"
   ],
   "license": "MIT",
   "repository": {
@@ -25,10 +40,11 @@
     "watch": "babel ./src --out-dir ./ --copy-files --watch",
     "build": "babel ./src --out-dir ./ --copy-files",
     "outdated": "$npm_execpath outdated --depth 0",
-    "coverage": "nyc --reporter=lcov --reporter=text --reporter=html $npm_execpath test",
+    "coverage": "c8 --reporter=lcov --reporter=text --reporter=html $npm_execpath test",
     "lint": "eslint src",
     "test": "ava",
     "test:watch": "ava --watch",
+    "test:all": "npm run typescript-test && npm run test",
     "typescript-test": "tsc --project test",
     "prepare": "husky"
   },
@@ -40,21 +56,22 @@
   "devDependencies": {
     "@babel/cli": "^7.28.3",
     "@babel/core": "^7.28.4",
+    "@babel/eslint-parser": "^7.28.6",
     "@babel/preset-env": "^7.28.3",
     "@babel/register": "^7.28.3",
     "ava": "^6.4.1",
-    "babel-eslint": "^10.1.0",
+    "c8": "^10.1.3",
     "eslint": "^9.36.0",
-    "eslint-plugin-jsdoc": "^60.1.1",
+    "eslint-plugin-jsdoc": "^62.5.0",
     "husky": "^9.1.7",
-    "nyc": "^17.1.0",
     "sinon": "^21.0.0",
     "typescript": "^5.9.2"
   },
   "ava": {
     "files": [
-      "test/*.mjs"
+      "test/*.mjs",
+      "test/*.cjs"
     ],
-    "require": "@babel/register"
+    "require": ["@babel/register"]
   }
 }

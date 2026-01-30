@@ -60,18 +60,19 @@ test('rodne cislo determines years by PIN length', (t) => {
 });
 
 test('rodne cislo parses the birth date', (t) => {
-  const PIN = '110124/0415';
   const YEAR = 2011;
   const MONTH_INDEX = 0;
   const MONTH = 1;
   const DAY = 24;
   const BIRTH_DATE = `${DAY}.${MONTH}.${YEAR}`;
 
-  t.is(rodnecislo(PIN).year(), YEAR);
-  t.is(rodnecislo(PIN).month(), MONTH_INDEX);
-  t.is(rodnecislo(PIN).day(), DAY);
-  t.is(rodnecislo(PIN).birthDate().toUTCString(), new Date(YEAR, MONTH_INDEX, DAY).toUTCString());
-  t.is(rodnecislo(PIN).birthDateAsString(), BIRTH_DATE);
+  const rc = rodnecislo('110124/0415');
+
+  t.is(rc.year(), YEAR);
+  t.is(rc.month(), MONTH_INDEX);
+  t.is(rc.day(), DAY);
+  t.is(rc.birthDate().toUTCString(), new Date(YEAR, MONTH_INDEX, DAY).toUTCString());
+  t.is(rc.birthDateAsString(), BIRTH_DATE);
 });
 
 test('rodne cislo finds out who is adult (over 18)', (t) => {
@@ -95,29 +96,58 @@ test('rodne cislo returns age', (t) => {
   t.is(rodnecislo('990201/1119').age(), Y17);
 });
 
-test('rodne cislo returns negative age when born tomorrow', (t) => {
-  const Y100 = 100;
-  const MONTH_INDEX = 0;
-  const DAY_INCREMENT = 0;
-  const REQUIRED_AGE = -1;
-  const MODULO11 = 11;
+test('rodne cislo returns negative age for future birth date', (t) => {
+  // The mocked date is 31.1.2017, so someone born Feb 1, 2017 has age -1
+  const FUTURE_PIN = '170201/0002';
+  const EXPECTED_AGE = -1;
 
-  const now = new Date();
-  const YY = now.getFullYear() % Y100; // Last two digits
-  const MM = now.getMonth() + MONTH_INDEX; // Months starts from 0
-  const DD = now.getDate() + DAY_INCREMENT; // Tomorrow!
-
-  let RC = `${YY}${MM}${DD}0000`; // Add four digits suffix
-
-  RC += MODULO11 - RC % MODULO11; // Fix the modulo condition
-
-  t.is(rodnecislo(RC).age(), REQUIRED_AGE);
+  t.true(rodnecislo(FUTURE_PIN).isPossible()); // Format is valid
+  t.false(rodnecislo(FUTURE_PIN).isValid()); // But not valid (future date)
+  t.is(rodnecislo(FUTURE_PIN).age(), EXPECTED_AGE);
 });
 
 test('rodne cislo generates DIC', (t) => {
   t.is(rodnecislo('990130/1113').dic(), 'CZ9901301113');
   t.is(rodnecislo('990131/1112').dic(), 'CZ9901311112');
   t.is(rodnecislo('990201/1119').dic(), 'CZ9902011119');
+});
+
+test('rodne cislo returns error messages', (t) => {
+  // Valid input - no error
+  t.is(rodnecislo('110124/0415').error(), null);
+
+  // Invalid inputs have errors
+  t.not(rodnecislo('invalid').error(), null);
+  t.not(rodnecislo('').error(), null);
+  t.not(rodnecislo('123').error(), null);
+
+  // Failed modulo condition
+  t.is(rodnecislo('110124/0422').error(), 'Failed the modulo condition');
+
+  // Invalid birth date (e.g., 31st of February)
+  t.is(rodnecislo('110231/0410').error(), 'Invalid birth date');
+});
+
+test('rodne cislo determines gender', (t) => {
+  // Male: month 01-12 or 21-32
+  const male = rodnecislo('850215/1988');
+  t.is(male.gender(), 'MALE');
+  t.true(male.isMale());
+  t.false(male.isFemale());
+
+  // Male with +20 offset
+  const maleOffset = rodnecislo('852215/7886');
+  t.is(maleOffset.gender(), 'MALE');
+
+  // Female: month 51-62 or 71-82
+  const female = rodnecislo('855215/5117');
+  t.is(female.gender(), 'FEMALE');
+  t.false(female.isMale());
+  t.true(female.isFemale());
+
+  // Female with +20 offset
+  const femaleOffset = rodnecislo('857215/5075');
+  t.is(femaleOffset.gender(), 'FEMALE');
 });
 
 // Issue #53: Removed 2004 year limit for +20 addition to month. It seems

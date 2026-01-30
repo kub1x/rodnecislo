@@ -31,7 +31,7 @@ If you want.
 
 ## Install
 
-Works with nodejs v10 and higer (ES2015).
+Works with Node.js v12 and higher (ES modules).
 
 ```sh
 npm install rodnecislo
