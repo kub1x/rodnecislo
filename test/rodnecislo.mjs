@@ -60,18 +60,19 @@ test('rodne cislo determines years by PIN length', (t) => {
 });
 
 test('rodne cislo parses the birth date', (t) => {
-  const PIN = '110124/0415';
   const YEAR = 2011;
   const MONTH_INDEX = 0;
   const MONTH = 1;
   const DAY = 24;
   const BIRTH_DATE = `${DAY}.${MONTH}.${YEAR}`;
 
-  t.is(rodnecislo(PIN).year(), YEAR);
-  t.is(rodnecislo(PIN).month(), MONTH_INDEX);
-  t.is(rodnecislo(PIN).day(), DAY);
-  t.is(rodnecislo(PIN).birthDate().toUTCString(), new Date(YEAR, MONTH_INDEX, DAY).toUTCString());
-  t.is(rodnecislo(PIN).birthDateAsString(), BIRTH_DATE);
+  const rc = rodnecislo('110124/0415');
+
+  t.is(rc.year(), YEAR);
+  t.is(rc.month(), MONTH_INDEX);
+  t.is(rc.day(), DAY);
+  t.is(rc.birthDate().toUTCString(), new Date(YEAR, MONTH_INDEX, DAY).toUTCString());
+  t.is(rc.birthDateAsString(), BIRTH_DATE);
 });
 
 test('rodne cislo finds out who is adult (over 18)', (t) => {
