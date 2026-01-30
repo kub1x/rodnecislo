@@ -164,10 +164,12 @@ class RodneCislo {
       this.#M -= EXTRA_MM_ADDITION;
     }
 
-    // Ok
+    // Convert to 0-based month index
     this.#M -= MONTH_OFFSET;
     this.#D = +this.#dd;
 
+    // Invalid month values (outside 01-12, 21-32, 51-62, 71-82) will result
+    // in invalid dates caught by #doesBirthdateExist()
     return true;
   }
 
