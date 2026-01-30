@@ -1,13 +1,18 @@
 /**
- * Module loading tests
+ * ESM module loading tests
  *
- * These tests verify that the package can be properly imported
- * using ES modules from the built lib directory.
+ * These tests verify that the package can be properly imported using ES modules.
+ *
+ * Note: ESM doesn't support directory imports like `import('../')`.
+ * The `exports` field resolution only works with package names (e.g., `import('rodnecislo')`),
+ * which requires the package to be installed. For testing from within the repo,
+ * we import the built file directly. The CommonJS test (commonjs-compat.cjs) tests
+ * the `main` field resolution via `require('../')`.
  */
 
 import test from 'ava';
 
-// Test ESM import from built lib
+// Import from built lib to test the actual package output
 test('ESM import: rodnecislo factory function works', async t => {
   const { rodnecislo } = await import('../lib/rodnecislo.js');
 
