@@ -33,7 +33,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kub1x/rodnecislo"
+    "url": "git+https://github.com/kub1x/rodnecislo.git"
   },
   "scripts": {
     "audit": "$npm_execpath audit",
@@ -72,6 +72,8 @@
       "test/*.mjs",
       "test/*.cjs"
     ],
-    "require": ["@babel/register"]
+    "require": [
+      "@babel/register"
+    ]
   }
 }
