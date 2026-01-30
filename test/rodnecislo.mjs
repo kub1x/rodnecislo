@@ -95,23 +95,14 @@ test('rodne cislo returns age', (t) => {
   t.is(rodnecislo('990201/1119').age(), Y17);
 });
 
-test('rodne cislo returns negative age when born tomorrow', (t) => {
-  const Y100 = 100;
-  const MONTH_INDEX = 0;
-  const DAY_INCREMENT = 0;
-  const REQUIRED_AGE = -1;
-  const MODULO11 = 11;
+test('rodne cislo returns negative age for future birth date', (t) => {
+  // The mocked date is 31.1.2017, so someone born Feb 1, 2017 has age -1
+  const FUTURE_PIN = '170201/0002';
+  const EXPECTED_AGE = -1;
 
-  const now = new Date();
-  const YY = now.getFullYear() % Y100; // Last two digits
-  const MM = now.getMonth() + MONTH_INDEX; // Months starts from 0
-  const DD = now.getDate() + DAY_INCREMENT; // Tomorrow!
-
-  let RC = `${YY}${MM}${DD}0000`; // Add four digits suffix
-
-  RC += MODULO11 - RC % MODULO11; // Fix the modulo condition
-
-  t.is(rodnecislo(RC).age(), REQUIRED_AGE);
+  t.true(rodnecislo(FUTURE_PIN).isPossible()); // Format is valid
+  t.false(rodnecislo(FUTURE_PIN).isValid()); // But not valid (future date)
+  t.is(rodnecislo(FUTURE_PIN).age(), EXPECTED_AGE);
 });
 
 test('rodne cislo generates DIC', (t) => {
