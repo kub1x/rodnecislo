@@ -2,10 +2,14 @@
   "compileOnSave": false,
   "compilerOptions": {
     "noEmit": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "target": "ES2020",
+    "strict": true
   },
   "files": [
-    "../src/lib/rodnecislo.d.ts",
+    "../lib/rodnecislo.d.ts",
     "./rodnecislo.ts"
   ]
 }
