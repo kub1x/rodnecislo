@@ -9,21 +9,26 @@
     ".": {
       "types": "./lib/rodnecislo.d.ts",
       "import": "./lib/rodnecislo.js",
+      "require": "./lib/rodnecislo.js",
       "default": "./lib/rodnecislo.js"
     }
   },
   "engines": {
     "node": ">=12.0.0"
   },
+  "sideEffects": false,
   "files": [
     "lib/"
   ],
   "keywords": [
-    "personal",
-    "ID",
     "Czech",
-    "node",
-    "module"
+    "Slovak",
+    "birth number",
+    "rodne cislo",
+    "rodné číslo",
+    "personal ID",
+    "national identification",
+    "validation"
   ],
   "license": "MIT",
   "repository": {
