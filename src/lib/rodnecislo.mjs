@@ -54,7 +54,7 @@ class RodneCislo {
 
   #longFormat = false;
   #error = null;
-  
+
   constructor(value) {
     this.year = () => this.#YYYY;
     this.month = () => this.#M;
@@ -196,6 +196,6 @@ class RodneCislo {
 
 function rodnecislo(value) {
   return new RodneCislo(value);
-};
+}
 
 export { rodnecislo, RodneCislo };
