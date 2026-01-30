@@ -40,10 +40,10 @@
   "devDependencies": {
     "@babel/cli": "^7.28.3",
     "@babel/core": "^7.28.4",
+    "@babel/eslint-parser": "^7.28.6",
     "@babel/preset-env": "^7.28.3",
     "@babel/register": "^7.28.3",
     "ava": "^6.4.1",
-    "babel-eslint": "^10.1.0",
     "eslint": "^9.36.0",
     "eslint-plugin-jsdoc": "^60.1.1",
     "husky": "^9.1.7",
