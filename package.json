@@ -2,9 +2,19 @@
   "name": "rodnecislo",
   "version": "1.7.0",
   "description": "A package for handling Czech and Slovak Personal ID",
-  "main": "lib/rodnecislo.mjs",
+  "main": "lib/rodnecislo.js",
   "types": "lib/rodnecislo.d.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./lib/rodnecislo.d.ts",
+      "import": "./lib/rodnecislo.js",
+      "default": "./lib/rodnecislo.js"
+    }
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
   "files": [
     "lib/"
   ],

@@ -1,21 +1,26 @@
 export function rodnecislo(rc: string): RodneCislo;
 
-export interface RodneCislo {
-  isPossible(): boolean
-  isValid(): boolean
+export class RodneCislo {
+  constructor(value: string);
 
-  isMale(): boolean
-  isFemale(): boolean
+  isPossible(): boolean;
+  isValid(): boolean;
 
-  year(): number
-  month(): number
-  day(): number
+  isMale(): boolean;
+  isFemale(): boolean;
+  gender(): 'MALE' | 'FEMALE';
 
-  birthDate(): Date
-  birthDateAsString(): string
+  year(): number;
+  month(): number;
+  day(): number;
 
-  isAdult(adulthood?: number): boolean
-  age(): number
+  birthDate(): Date;
+  birthDateAsString(): string;
 
-  dic(): string
+  isAdult(adulthood?: number): boolean;
+  age(): number;
+
+  dic(): string;
+
+  error(): string | null;
 }
