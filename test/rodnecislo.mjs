@@ -120,6 +120,22 @@ test('rodne cislo generates DIC', (t) => {
   t.is(rodnecislo('990201/1119').dic(), 'CZ9902011119');
 });
 
+test('rodne cislo returns error messages', (t) => {
+  // Valid input - no error
+  t.is(rodnecislo('110124/0415').error(), null);
+
+  // Invalid inputs have errors
+  t.not(rodnecislo('invalid').error(), null);
+  t.not(rodnecislo('').error(), null);
+  t.not(rodnecislo('123').error(), null);
+
+  // Failed modulo condition
+  t.is(rodnecislo('110124/0422').error(), 'Failed the modulo condition');
+
+  // Invalid birth date (e.g., 31st of February)
+  t.is(rodnecislo('110231/0410').error(), 'Invalid birth date');
+});
+
 test('rodne cislo determines gender', (t) => {
   // Male: month 01-12 or 21-32
   const male = rodnecislo('850215/1988');
