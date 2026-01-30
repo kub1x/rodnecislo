@@ -120,6 +120,28 @@ test('rodne cislo generates DIC', (t) => {
   t.is(rodnecislo('990201/1119').dic(), 'CZ9902011119');
 });
 
+test('rodne cislo determines gender', (t) => {
+  // Male: month 01-12 or 21-32
+  const male = rodnecislo('850215/1988');
+  t.is(male.gender(), 'MALE');
+  t.true(male.isMale());
+  t.false(male.isFemale());
+
+  // Male with +20 offset
+  const maleOffset = rodnecislo('852215/7886');
+  t.is(maleOffset.gender(), 'MALE');
+
+  // Female: month 51-62 or 71-82
+  const female = rodnecislo('855215/5117');
+  t.is(female.gender(), 'FEMALE');
+  t.false(female.isMale());
+  t.true(female.isFemale());
+
+  // Female with +20 offset
+  const femaleOffset = rodnecislo('857215/5075');
+  t.is(femaleOffset.gender(), 'FEMALE');
+});
+
 // Issue #53: Removed 2004 year limit for +20 addition to month. It seems
 // to be backward applicable. 
 // See: https://github.com/kub1x/rodnecislo/issues/53
