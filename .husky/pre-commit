@@ -1,6 +1,7 @@
 npm run audit
 npm run outdated
 npm run build
-#npm run lint
+npm run lint
 npm run test
 npm run typescript-test
+npm pkg fix
