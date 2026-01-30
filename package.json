@@ -38,9 +38,8 @@
     "coverage": "nyc --reporter=lcov --reporter=text --reporter=html $npm_execpath test",
     "lint": "eslint src",
     "test": "ava",
-    "test:cjs": "node test/commonjs-compat.cjs",
     "test:watch": "ava --watch",
-    "test:all": "npm run typescript-test && npm run test && npm run test:cjs",
+    "test:all": "npm run typescript-test && npm run test",
     "typescript-test": "tsc --project test",
     "prepare": "husky"
   },
@@ -65,7 +64,8 @@
   },
   "ava": {
     "files": [
-      "test/*.mjs"
+      "test/*.mjs",
+      "test/*.cjs"
     ],
     "require": "@babel/register"
   }

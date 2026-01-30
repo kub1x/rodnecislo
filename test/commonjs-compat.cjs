@@ -2,53 +2,62 @@
  * CommonJS compatibility test
  *
  * Tests that the package can be required from CommonJS.
- * Run with: node test/commonjs-compat.cjs
+ * This file is .cjs to ensure it runs in CommonJS mode.
  */
 
-const assert = require('assert');
+const test = require('ava');
 
-async function testCommonJSCompatibility() {
-  console.log('Testing CommonJS compatibility...\n');
-
-  // Test require() on package root
-  console.log('Testing require("../")...');
+test('CJS require: package exports rodnecislo and RodneCislo', t => {
   const pkg = require('../');
 
-  assert.strictEqual(typeof pkg.rodnecislo, 'function', 'rodnecislo should be exported');
-  console.log('✓ require("../") works');
-  console.log('✓ rodnecislo factory function exported');
+  t.is(typeof pkg.rodnecislo, 'function', 'rodnecislo should be a function');
+  t.is(typeof pkg.RodneCislo, 'function', 'RodneCislo should be a function');
+});
 
-  assert.strictEqual(typeof pkg.RodneCislo, 'function', 'RodneCislo should be exported');
-  console.log('✓ RodneCislo class exported');
+test('CJS require: rodnecislo factory function works', t => {
+  const { rodnecislo } = require('../');
 
-  // Test factory function
-  const rc = pkg.rodnecislo('111213/3121');
+  const rc = rodnecislo('111213/3121');
+  t.true(rc.isValid());
+  t.is(rc.year(), 2011);
+  t.is(rc.gender(), 'MALE');
+  t.is(rc.error(), null);
+});
 
-  assert.strictEqual(rc.isValid(), true, 'isValid() should return true');
-  console.log('✓ isValid() works');
+test('CJS require: RodneCislo class can be instantiated', t => {
+  const { RodneCislo } = require('../');
 
-  assert.strictEqual(rc.year(), 2011, 'year() should return 2011');
-  console.log('✓ year() works');
+  const rc = new RodneCislo('111213/3121');
+  t.true(rc instanceof RodneCislo);
+  t.true(rc.isValid());
+});
 
-  assert.strictEqual(rc.gender(), 'MALE', 'gender() should return MALE');
-  console.log('✓ gender() works');
+test('CJS require: all public methods are accessible', t => {
+  const { rodnecislo } = require('../');
 
-  assert.strictEqual(rc.error(), null, 'error() should return null for valid input');
-  console.log('✓ error() works');
+  const rc = rodnecislo('111213/3121');
 
-  // Test class instantiation
-  const instance = new pkg.RodneCislo('111213/3121');
+  // Validation methods
+  t.is(typeof rc.isValid(), 'boolean');
+  t.is(typeof rc.isPossible(), 'boolean');
 
-  assert.strictEqual(instance instanceof pkg.RodneCislo, true, 'should be instanceof RodneCislo');
-  console.log('✓ instanceof RodneCislo works');
+  // Gender methods
+  t.is(typeof rc.isMale(), 'boolean');
+  t.is(typeof rc.isFemale(), 'boolean');
+  t.true(['MALE', 'FEMALE'].includes(rc.gender()));
 
-  assert.strictEqual(instance.isValid(), true, 'instance.isValid() should return true');
-  console.log('✓ class instance methods work');
+  // Date methods
+  t.is(typeof rc.year(), 'number');
+  t.is(typeof rc.month(), 'number');
+  t.is(typeof rc.day(), 'number');
+  t.true(rc.birthDate() instanceof Date);
+  t.is(typeof rc.birthDateAsString(), 'string');
 
-  console.log('\n✅ All CommonJS compatibility tests passed!');
-}
+  // Age methods
+  t.is(typeof rc.age(), 'number');
+  t.is(typeof rc.isAdult(), 'boolean');
 
-testCommonJSCompatibility().catch(err => {
-  console.error('❌ Test failed:', err.message);
-  process.exit(1);
+  // Other methods
+  t.is(typeof rc.dic(), 'string');
+  t.true(rc.error() === null || typeof rc.error() === 'string');
 });
