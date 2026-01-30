@@ -4,6 +4,7 @@
   "description": "A package for handling Czech and Slovak Personal ID",
   "main": "lib/rodnecislo.js",
   "types": "lib/rodnecislo.d.ts",
+  "type": "module",
   "exports": {
     ".": {
       "types": "./lib/rodnecislo.d.ts",
@@ -13,7 +14,7 @@
     }
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=20.0.0"
   },
   "sideEffects": false,
   "files": [
