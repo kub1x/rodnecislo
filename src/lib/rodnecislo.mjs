@@ -108,29 +108,18 @@ class RodneCislo {
 
     this.#longFormat = match[MATCH_XX].length === LONG_XX_LENGTH;
 
-    let whole, test, check;
-
-    try {
-      // Birth date parsed
-      this.#yy = match[MATCH_YY];
-      this.#mm = match[MATCH_MM];
-      this.#dd = match[MATCH_DD];
-      this.#xxx = match[MATCH_XX];
-
-      if (this.#longFormat) {
-        whole = `${match[MATCH_YY]}${match[MATCH_MM]}${match[MATCH_DD]}${match[MATCH_XX]}`;
-        test = +whole.slice(BEGIN, LAST); // all but last
-        check = +whole.slice(LAST); // the last digit
-        whole = +whole; // all of it
-      }
-
-    } catch (e) {
-      this.#error = 'Failed to parse input string';
-      return false;
-    }
+    // Birth date parsed
+    this.#yy = match[MATCH_YY];
+    this.#mm = match[MATCH_MM];
+    this.#dd = match[MATCH_DD];
+    this.#xxx = match[MATCH_XX];
 
     if (this.#longFormat) {
-      if (whole % MODULO === MODULO_RESULT) {
+      const whole = `${match[MATCH_YY]}${match[MATCH_MM]}${match[MATCH_DD]}${match[MATCH_XX]}`;
+      const test = +whole.slice(BEGIN, LAST); // all but last
+      const check = +whole.slice(LAST); // the last digit
+
+      if (+whole % MODULO === MODULO_RESULT) {
         // good old classic
       } else if (test % MODULO === MODULO_EXCEPTION_VALUE && check === MODULO_EXCEPTION_CHECK) {
         // the rare 1000 cases
