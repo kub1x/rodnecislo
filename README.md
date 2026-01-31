@@ -14,7 +14,7 @@ or *rodné číslo* in both Czech and Slovak hence the library name.
 
 ## Install
 
-Works with Node.js v12 and higher (ES modules).
+Works with Node.js v20 and higher (ES modules).
 
 ```sh
 npm install rodnecislo
