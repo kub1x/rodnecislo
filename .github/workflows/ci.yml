@@ -77,7 +77,7 @@ jobs:
         run: bun run build
 
       - name: Test with Bun
-        run: bun test
+        run: bun run test
 
   coverage:
     needs: [test, test-deno, test-bun]
