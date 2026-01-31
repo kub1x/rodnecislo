@@ -38,8 +38,49 @@ jobs:
           flag-name: node-${{ matrix.node-version }}
           parallel: true
 
+  test-deno:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v2
+
+      - name: Test with Deno
+        run: |
+          deno eval "
+            import { rodnecislo, RodneCislo } from './lib/rodnecislo.js';
+
+            const rc = rodnecislo('880124/0415');
+            if (!rc.isValid()) throw new Error('Expected valid');
+            if (rc.year() !== 1988) throw new Error('Expected year 1988');
+            if (rc.gender() !== 'MALE') throw new Error('Expected MALE');
+
+            const rc2 = new RodneCislo('111213/3121');
+            if (!rc2.isValid()) throw new Error('Expected valid');
+
+            console.log('Deno: All tests passed');
+          "
+
+  test-bun:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build
+        run: bun run build
+
+      - name: Test with Bun
+        run: bun test
+
   coverage:
-    needs: test
+    needs: [test, test-deno, test-bun]
     runs-on: ubuntu-latest
     steps:
       - name: Coveralls Finished
